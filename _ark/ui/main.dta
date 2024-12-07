@@ -24,8 +24,7 @@
                {==
                   {campaign tutorials_done}
                   0}}
-            ;permadeath qol, sets first button to career
-            {$this set_focus main_career.btn}}
+            {$this set_focus main_tutorial.btn}}
          {$this set already_entered TRUE}}
       {game set_tutorial_running FALSE}
       {main_msg.view set_showing FALSE}

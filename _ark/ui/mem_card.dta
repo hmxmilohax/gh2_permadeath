@@ -93,13 +93,14 @@
       {$this setup '' '' none $msg $title})}
 {func
    goto_startup_load
+   ;set initial screen for create a save to our custom screen
    {set $mc_return_screen permadeath_lives_screen}
    {set $autosave TRUE}
    {if_else
       {profilemgr is_active_pad_signed_in}
       {ui goto_screen startup_load_finder_screen}
       {ui goto_screen startup_signin_screen}}}
-;rewrite func to inject permadeath custom screen
+;rewrite func to inject permadeath custom screen when loading a save
 {func goto_post_startup_load {ui goto_screen permadeath_lives_screen}}
 {new
    GHScreen
