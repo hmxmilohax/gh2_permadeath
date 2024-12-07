@@ -37,4 +37,5 @@
 {set $this_note_streak 0}
 {set $this_songs_completed 0}
 {set $this_attempts 0}
+{set $temp_note_streak 0}
 {ui goto_screen $first_screen}
