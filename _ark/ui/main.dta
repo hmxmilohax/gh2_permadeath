@@ -8,8 +8,6 @@
    (retain_last_focus FALSE)
    (enter
       {set $main_entered TRUE}
-      ;permadeath disables quickplay
-      {$this disable main_quickspin.btn}
       {set $leaderboards_mode FALSE}
       {$this reset_player_settings}
       {if
@@ -38,6 +36,8 @@
       {gamecfg set mode quickplay}
       ;permadeath qol, sets first button to career
       {$this set_focus main_career.btn}
+      ;permadeath disables quickplay
+      {$this disable main_quickspin.btn}
       ;don't scan dlc
       ;{content_mgr start_enumeration}
    )
