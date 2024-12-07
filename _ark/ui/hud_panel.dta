@@ -2,6 +2,7 @@
 (480)
 #define WIN_MESSAGE_SECS
 (3)
+#include permadeath_callback.dta
 {new
    HudPanel
    hud
@@ -11,6 +12,12 @@
          {gamecfg get hud_file}})
    (enter
       {game add_sinks $this intro_start_msg intro_skip slide_meter_in star_power_ready game_won_msg game_lost game_outro_complete star_power_start star_power_stop sp_engage start}
+      ;permadeath add our custom callback for miss tracking
+      {if {!= {gamecfg get mode} practice}
+         {player_matcher0 add_sink note_streak_callback_p0}
+      }
+      {if {exists player_matcher1}
+         {player_matcher1 add_sink note_streak_callback_p1}}
       {if
          {!=
             tutorial

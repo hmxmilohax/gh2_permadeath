@@ -1,6 +1,8 @@
 #include splash.dta
 #include manage_bands.dta
 #include mem_card.dta
+;permadeath custom screens
+#include permadeath_dialog.dta
 #include error.dta
 #include loading.dta
 #include game.dta
@@ -29,4 +31,10 @@
       {option_str budget_config $cfg}
       {track_budget setup $cfg}
       {set $first_screen track_budget}}}
+;permadeath set initial values to int
+{set $highest_note_streak 0}
+{set $highest_songs_completed 0}
+{set $this_note_streak 0}
+{set $this_songs_completed 0}
+{set $this_attempts 0}
 {ui goto_screen $first_screen}

@@ -1,0 +1,122 @@
+{new
+   GHScreen
+   permadeath_lives_screen
+   DIALOG_SCREEN
+   (enter
+      ;initial lives
+      {set $num_of_lives 3}
+      ;panel handle btn1 btn2 default_sel bodymsg header
+      {dialog setup confirm none button1 none gh2_permadeath}
+      ;print live selection
+      {{dialog find dl_message.lbl} set_localized_text {sprintf {localize num_lives} $num_of_lives}}
+      ;we take over select_start_msg so we dont have to disable the second button
+      {{dialog find dl_button2.btn} set_showing FALSE}
+   )
+   (BUTTON_DOWN_MSG
+      ;we removed select_start_msg so we have to replicate the sound effects that would otherwise happen
+      {switch $button
+         (kPad_DUp
+            {if {< $num_of_lives 10}
+               {++ $num_of_lives}
+               {synth play_sequence button_toggle}
+            }
+            {if {== $num_of_lives 10}
+               {play_sfx button_error}
+            }
+         )
+         (kPad_DDown
+            {if {> $num_of_lives 1}
+               {-- $num_of_lives}
+               {synth play_sequence button_toggle}
+            }
+            {if {== $num_of_lives 1}
+               {play_sfx button_error}
+            }
+         )
+         (kPad_X
+            {ui goto_screen permadeath_attempts_screen}
+            {synth play_sequence button_play}
+         )
+      }
+      ;update life counter
+      {{dialog find dl_message.lbl} set_localized_text {sprintf {localize num_lives} $num_of_lives}}
+   )
+}
+{new
+   GHScreen
+   permadeath_attempts_screen
+   DIALOG_SCREEN
+   (enter
+      ;panel handle btn1 btn2 default_sel bodymsg header
+      {dialog setup continue lives button1 none gh2_permadeath}
+      ;print welcome and stats
+      {{dialog find dl_message.lbl} set_localized_text {sprintf {localize permadeath_welcome} $this_attempts $highest_note_streak $highest_songs_completed}})
+   (SELECT_START_MSG
+      ;disable saving if never won
+      {set $autosave FALSE}
+      {set $disable_save TRUE}
+      ;add a new attempt count and reset streaks
+      {set $lives_lost {int 0}}
+      {set $this_note_streak {int 0}}
+      {set $this_songs_completed {int 0}}
+      {switch
+         $component
+         (dl_button1.btn
+            ;go to the game (you lost)
+            {ui goto_screen main_screen}
+            {++ $this_attempts})
+         (dl_button2.btn
+            ;go back and pick lives
+            {ui goto_screen permadeath_lives_screen})
+      }
+   )
+}
+
+{new
+   GHScreen
+   permadeath_win_screen
+   DIALOG_SCREEN
+   (enter
+      ;panel handle btn1 btn2 default_sel bodymsg header
+      {dialog setup you won button1 none gh2_permadeath}
+      ;print stats
+      {if_else {== $lives_lost 0}
+         {{dialog find dl_message.lbl} set_localized_text {sprintf {localize permadeath_win_no_miss} $lives_lost $this_attempts $highest_note_streak $highest_songs_completed}}
+         {{dialog find dl_message.lbl} set_localized_text {sprintf {localize permadeath_win} $lives_lost $this_attempts $highest_note_streak $highest_songs_completed}}
+      }
+      {set $autosave TRUE}
+      {set $disable_save FALSE})
+   (SELECT_START_MSG
+      {switch
+         $component
+         (dl_button1.btn
+            {autosave_goto main_screen})
+         (dl_button2.btn
+            {autosave_goto main_screen})
+      }
+   )
+}
+{new
+   GHScreen
+   permadeath_lost_screen
+   DIALOG_SCREEN
+   (enter
+      ;panel handle btn1 btn2 default_sel bodymsg header
+      {dialog setup song_list main_menu button1 none gh2_permadeath}
+      ;print loss
+      ;| || || |_
+      {if_else {== $lives_lost {- $num_of_lives 1}}
+         {{dialog find dl_message.lbl} set_localized_text permadeath_lost_final}
+         {{dialog find dl_message.lbl} set_localized_text {sprintf {localize permadeath_lost} {- $num_of_lives $lives_lost}}}
+      }
+   )
+   (SELECT_START_MSG
+      {switch
+         $component
+         (dl_button1.btn
+            {ui goto_screen sel_song_screen})
+         (dl_button2.btn
+            {ui goto_screen main_screen})
+      }
+   )
+}

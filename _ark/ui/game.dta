@@ -258,6 +258,13 @@
                {achievements
                   submit_coop_points
                   {band score}}}
+            ;permadeath track song completion metrics
+            {if {!= {gamecfg get mode} practice}
+               {++ $this_songs_completed}
+               {if {> $this_songs_completed $highest_songs_completed}
+                  {set $highest_songs_completed $this_songs_completed}
+               }
+            }
             {track_panel explode}
             {play_game_sfx TRACK_EXPLODE_SFX}
             {game set_realtime TRUE}

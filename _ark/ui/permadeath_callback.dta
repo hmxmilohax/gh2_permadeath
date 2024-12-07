@@ -1,0 +1,36 @@
+#define LOST_THE_GAME
+(
+   {++ $lives_lost}
+   {if {< $lives_lost $num_of_lives}
+      {meta_loading_goto permadeath_lost_screen}
+   }
+   {if {== $num_of_lives $lives_lost}
+      {foreach_int $idx 0 MAX_NUM_PROFILES
+         {if {! {campaign is_empty_profile $idx}}
+            {campaign delete_slot $idx}
+         }
+      }
+      {meta_loading_goto permadeath_lives_screen}
+   }
+)
+#define COMMON_CALLBACK_HANDLES
+(
+   (gem_hit_callback
+      {++ $this_note_streak}
+      {if {> $this_note_streak $highest_note_streak}
+         {set $highest_note_streak $this_note_streak}
+      }
+   )
+   (gem_miss_callback LOST_THE_GAME)
+   (gem_pass_callback LOST_THE_GAME)
+)
+{new
+   Object
+   note_streak_callback_p0
+   COMMON_CALLBACK_HANDLES
+}
+{new
+   Object
+   note_streak_callback_p1
+   COMMON_CALLBACK_HANDLES
+}

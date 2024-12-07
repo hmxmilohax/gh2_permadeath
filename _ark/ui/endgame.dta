@@ -1,3 +1,4 @@
+#include permadeath_endgame
 {new
    GHScreen
    post_show_screen
@@ -1378,6 +1379,7 @@
    complete_panel
    (file complete.milo)
    (enter
+      PERMADEATH_CHECK_WIN
       {$this set_focus comp_selsong.btn}
       {if_else
          {&&
@@ -1391,15 +1393,15 @@
          {comp_selsong.btn set_text CONTINUE}
          {comp_selsong.btn set_text comp_selsong}})
    (SELECT_START_MSG
-      {switch
-         $component
-         (comp_selsong.btn
-            {meta_loading_goto
-               {gamecfg get continue_screen}})
-         (comp_restart.btn
-            {game_restart_fast})
-         (comp_quit.btn
-            {meta_loading_goto main_screen})}
+         {switch
+            $component
+            (comp_selsong.btn
+               {meta_loading_goto
+                  {gamecfg get continue_screen}})
+            (comp_restart.btn
+               {game_restart_fast})
+            (comp_quit.btn
+               {meta_loading_goto main_screen})}
       {stop_sfx postshow_loop}
       {if
          {==

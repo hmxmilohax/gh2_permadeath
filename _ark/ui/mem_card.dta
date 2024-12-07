@@ -93,20 +93,14 @@
       {$this setup '' '' none $msg $title})}
 {func
    goto_startup_load
-   {set $mc_return_screen guitar_help_screen}
+   {set $mc_return_screen permadeath_lives_screen}
    {set $autosave TRUE}
    {if_else
       {profilemgr is_active_pad_signed_in}
       {ui goto_screen startup_load_finder_screen}
       {ui goto_screen startup_signin_screen}}}
-{func
-   goto_post_startup_load
-   {if_else
-      {>
-         {campaign num_profiles}
-         0}
-      {ui goto_screen main_screen}
-      {ui goto_screen guitar_help_screen}}}
+;rewrite func to inject permadeath custom screen
+{func goto_post_startup_load {ui goto_screen permadeath_lives_screen}}
 {new
    GHScreen
    startup_signin_screen

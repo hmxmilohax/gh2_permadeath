@@ -8,6 +8,8 @@
    (retain_last_focus FALSE)
    (enter
       {set $main_entered TRUE}
+      ;permadeath disables quickplay
+      {$this disable main_quickspin.btn}
       {set $leaderboards_mode FALSE}
       {$this reset_player_settings}
       {if
@@ -22,7 +24,8 @@
                {==
                   {campaign tutorials_done}
                   0}}
-            {$this set_focus main_tutorial.btn}}
+            ;permadeath qol, sets first button to career
+            {$this set_focus main_career.btn}}
          {$this set already_entered TRUE}}
       {game set_tutorial_running FALSE}
       {main_msg.view set_showing FALSE}
@@ -34,7 +37,11 @@
          0
          {profilemgr active_padnum}}
       {gamecfg set mode quickplay}
-      {content_mgr start_enumeration})
+      ;permadeath qol, sets first button to career
+      {$this set_focus main_career.btn}
+      ;don't scan dlc
+      ;{content_mgr start_enumeration}
+   )
    (SELECT_START_MSG
       {switch
          $component
