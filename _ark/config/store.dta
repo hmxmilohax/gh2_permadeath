@@ -109,8 +109,6 @@
       (price 550))
    (collide
       (price 550))
-   (drinkup
-      (price 550))
    (elephantbones
       (price 550))
    (fallofpangea
@@ -118,8 +116,6 @@
    (ftk
       (price 550))
    (gemini
-      (price 550))
-   (kicked
       (price 550))
    (ladylightning
       (price 550))
@@ -154,7 +150,28 @@
    (xstream
       (price 550))
    (yeswecan
-      (price 550)))
+      (price 550))
+   #ifdef HX_XBOX
+   (hush
+      (price 0))
+   (possum
+      (price 0))
+   (salvation
+      (price 0))
+   (lifewasted
+      (price 0))
+   (billiondollar
+      (price 0))
+   (rockandroll
+      (price 0))
+   (trooper
+      (price 0))
+   (drinkup
+      (price 0))
+   (kicked
+      (price 0))
+   #endif
+)
 (character
    (classic
       (price 5000))
