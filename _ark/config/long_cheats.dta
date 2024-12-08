@@ -30,16 +30,7 @@
 (kPad_Square)
 #endif
 ((G_BLUE G_YELLOW G_ORANGE G_RED G_ORANGE G_YELLOW G_RED G_YELLOW G_RED G_YELLOW G_RED G_YELLOW G_RED G_YELLOW G_RED G_YELLOW)
-   {if
-      {&&
-         CHEATS_ALLOWED
-         {! $cheat_enabled_unlock_all}}
-      {set $cheat_enabled_unlock_all 1}
-      {campaign set_all_access 1}
-      {set $disable_save 1}
-      {set $disable_career 1}
-      {main_screen display_cheat_msg cheat_unlock_all TRUE}
-      {play_sfx cheat}})
+   {play_sfx button_error})
 ((G_YELLOW G_YELLOW G_BLUE G_ORANGE G_YELLOW G_BLUE)
    {if
       CHEATS_ALLOWED
@@ -73,10 +64,12 @@
          $cheat_enabled_hyper_speed_mode
          {do
             {set $cheat_enabled_hyper_speed_mode FALSE}
+            {set $turned_off TRUE}
             {main_screen display_cheat_msg cheat_hyper_speed_mode FALSE}
             {play_sfx cheat_off}}
          {do
             {set $cheat_enabled_hyper_speed_mode TRUE}
+            {set $turned_off FALSE}
             {main_screen display_cheat_msg cheat_hyper_speed_mode TRUE}
             {play_sfx cheat}}}})
 #ifdef HX_EE
@@ -143,16 +136,7 @@
 
 ;gh2 360
 ((G_BLUE G_YELLOW G_ORANGE G_RED G_YELLOW G_ORANGE G_BLUE G_YELLOW G_BLUE G_YELLOW G_BLUE G_YELLOW G_BLUE G_YELLOW G_BLUE G_YELLOW)
-   {if
-      {&&
-         CHEATS_ALLOWED
-         {! $cheat_enabled_unlock_all}}
-      {set $cheat_enabled_unlock_all 1}
-      {campaign set_all_access 1}
-      {set $disable_save 1}
-      {set $disable_career 1}
-      {main_screen display_cheat_msg cheat_unlock_all TRUE}
-      {play_sfx cheat}})
+   {play_sfx button_error})
 ((G_YELLOW G_BLUE G_YELLOW G_ORANGE G_YELLOW G_BLUE)
    {if
       CHEATS_ALLOWED
@@ -186,10 +170,12 @@
          $cheat_enabled_hyper_speed_mode
          {do
             {set $cheat_enabled_hyper_speed_mode FALSE}
+            {set $turned_off TRUE}
             {main_screen display_cheat_msg cheat_hyper_speed_mode FALSE}
             {play_sfx cheat_off}}
          {do
             {set $cheat_enabled_hyper_speed_mode TRUE}
+            {set $turned_off FALSE}
             {main_screen display_cheat_msg cheat_hyper_speed_mode TRUE}
             {play_sfx cheat}}}})
 ((G_YELLOW G_ORANGE G_YELLOW G_YELLOW G_ORANGE G_YELLOW G_YELLOW G_ORANGE)
@@ -238,16 +224,7 @@
 
 ;gh80s usa
 ((G_BLUE G_ORANGE G_YELLOW G_RED G_ORANGE G_YELLOW G_BLUE G_YELLOW G_RED G_YELLOW G_BLUE G_YELLOW G_RED G_YELLOW G_BLUE G_YELLOW)
-   {if
-      {&&
-         CHEATS_ALLOWED
-         {! $cheat_enabled_unlock_all}}
-      {set $cheat_enabled_unlock_all 1}
-      {campaign set_all_access 1}
-      {set $disable_save 1}
-      {set $disable_career 1}
-      {main_screen display_cheat_msg cheat_unlock_all TRUE}
-      {play_sfx cheat}})
+   {play_sfx button_error})
 ((G_YELLOW G_BLUE G_YELLOW G_ORANGE G_BLUE G_BLUE)
    {if
       CHEATS_ALLOWED
@@ -281,10 +258,12 @@
          $cheat_enabled_hyper_speed_mode
          {do
             {set $cheat_enabled_hyper_speed_mode FALSE}
+            {set $turned_off TRUE}
             {main_screen display_cheat_msg cheat_hyper_speed_mode FALSE}
             {play_sfx cheat_off}}
          {do
             {set $cheat_enabled_hyper_speed_mode TRUE}
+            {set $turned_off FALSE}
             {main_screen display_cheat_msg cheat_hyper_speed_mode TRUE}
             {play_sfx cheat}}}})
 #ifdef HX_EE
@@ -354,9 +333,11 @@
          $cheat_enabled_hyper_speed_mode
          {do
             {set $cheat_enabled_hyper_speed_mode FALSE}
+            {set $turned_off TRUE}
             {main_screen display_cheat_msg cheat_hyper_speed_mode FALSE}
             {play_sfx cheat_off}}
          {do
             {set $cheat_enabled_hyper_speed_mode TRUE}
+            {set $turned_off FALSE}
             {main_screen display_cheat_msg cheat_hyper_speed_mode TRUE}
             {play_sfx cheat}}}})

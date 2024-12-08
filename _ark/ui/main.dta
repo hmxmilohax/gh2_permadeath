@@ -40,6 +40,12 @@
       {$this disable main_quickspin.btn}
       ;don't scan dlc
       ;{content_mgr start_enumeration}
+      ;enable hyperspeed
+      {if {&& {! $cheat_enabled_hyper_speed_mode} {! $turned_off}}
+         {set $cheat_enabled_hyper_speed_mode TRUE}
+         {main_screen display_cheat_msg cheat_hyper_speed_mode TRUE}
+         {play_sfx cheat}
+      }
    )
    (SELECT_START_MSG
       {switch
