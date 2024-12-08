@@ -65,6 +65,7 @@
       #ifdef HX_XBOX
       {rnd suspend}
       #endif
+      {set $passed_first_note FALSE}
       {set_loader_period 5}
       {set
          [encore_unlock_check]
