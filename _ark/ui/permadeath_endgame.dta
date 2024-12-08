@@ -81,3 +81,41 @@
       {meta_loading_goto permadeath_win_screen}
    }
 )
+#define PERMADEATH_CHECK_WIN_80S
+(
+   {if
+      {&&
+         {campaign is_song_passed bangyourhead}
+         {campaign is_song_passed wegotthebeat}
+         {campaign is_song_passed iran}
+         {campaign is_song_passed ballstothewall}
+         {campaign is_song_passed 18andlife}
+         {campaign is_song_passed noonelikeyou}
+         {campaign is_song_passed shakin}
+         {campaign is_song_passed heatofthemoment}
+         {campaign is_song_passed radarlove}
+         {campaign is_song_passed becauseitsmidnite}
+         {campaign is_song_passed holydiver}
+         {campaign is_song_passed turningjapanese}
+         {campaign is_song_passed holdonloosely}
+         {campaign is_song_passed thewarrior}
+         {campaign is_song_passed iwannarock}
+         {campaign is_song_passed whatilikeaboutyou}
+         {campaign is_song_passed synchronicity2}
+         {campaign is_song_passed ballroomblitz}
+         {campaign is_song_passed onlyalad}
+         {campaign is_song_passed roundandround}
+         {campaign is_song_passed aintnothinbut}
+         {campaign is_song_passed lonelyisthenight}
+         {campaign is_song_passed bathroomwall}
+         {campaign is_song_passed losangeles}
+         {campaign is_song_passed wrathchild}
+         {campaign is_song_passed electriceye}
+         {campaign is_song_passed policetruck}
+         {campaign is_song_passed seventeen}
+         {campaign is_song_passed caughtinamosh}
+         {campaign is_song_passed playwithme}
+      }
+      {meta_loading_goto permadeath_win_screen}
+   }
+)

@@ -1380,7 +1380,11 @@
    (file complete.milo)
    (enter
       ;check if all songs have been fc'd and prompt win
+      #ifdef GAME_GH2
       PERMADEATH_CHECK_WIN
+      #else
+      PERMADEATH_CHECK_WIN_80S
+      #endif
       {$this set_focus comp_selsong.btn}
       {if_else
          {&&
