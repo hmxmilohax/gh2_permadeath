@@ -1,5 +1,5 @@
 (num_lives
-   "Number of lives: %i\nYour save is deleted if you lose all of your lives.\n\nMissing will always exit a song.")
+   "Number of lives: %i\nYour save will be deleted if you lose all of your lives.\n\nMissing will always exit a song.")
 (gh2_permadeath
    "GH2 Permadeath")
 (permadeath_welcome
@@ -9,11 +9,11 @@
 (permadeath_lost_final
    "You missed.\nThis is your final life.")
 (permadeath_lost_restart
-   "You Died.")
+   "You died.\nYour progress has been deleted.")
 (permadeath_win
    "Holy shit you did it!\nNow do it with less misses.\nLives lost: %i\nAttempts: %i\nTop Streak: %i\nTop FC streak: %i songs")
 (permadeath_win_no_miss
-   "Holy shit you did it!\nWith no misses too?\nLives lost: %i\nAttempts: %i\nTop Streak: %i\nTop FC streak: %i songs")
+   "Holy shit you did it!\nWith no misses too? WOW\nLives lost: %i\nAttempts: %i\nTop Streak: %i\nTop FC streak: %i songs")
 (song_list
    "song select")
 (main_menu
