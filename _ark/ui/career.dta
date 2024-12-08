@@ -1304,7 +1304,9 @@
       (repeat_ms 80))
    (load
       {profilemgr add_sink $this storage_changed}
-      {content_mgr start_enumeration})
+      ;turn off content enumenration
+      ;{content_mgr start_enumeration}
+   )
    (storage_changed
       {$this clear_cache}
       {ui goto_screen storage_changed_screen})
