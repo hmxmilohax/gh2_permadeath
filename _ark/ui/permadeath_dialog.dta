@@ -1,10 +1,46 @@
+{func
+   num_to_alph
+   ($in)
+   {search_replace {sprint $in} "0" "A" $in}
+   {search_replace {sprint $in} "1" "B" $in}
+   {search_replace {sprint $in} "2" "C" $in}
+   {search_replace {sprint $in} "3" "D" $in}
+   {search_replace {sprint $in} "4" "E" $in}
+   {search_replace {sprint $in} "5" "F" $in}
+   {search_replace {sprint $in} "6" "G" $in}
+   {search_replace {sprint $in} "7" "H" $in}
+   {search_replace {sprint $in} "8" "I" $in}
+   {search_replace {sprint $in} "9" "J" $in}
+   $in
+}
+{func
+   alph_to_num
+   ($in)
+   {search_replace $in 'A' '0' $in}
+   {search_replace $in 'B' '1' $in}
+   {search_replace $in 'C' '2' $in}
+   {search_replace $in 'D' '3' $in}
+   {search_replace $in 'E' '4' $in}
+   {search_replace $in 'F' '5' $in}
+   {search_replace $in 'G' '6' $in}
+   {search_replace $in 'H' '7' $in}
+   {search_replace $in 'I' '8' $in}
+   {search_replace $in 'J' '9' $in}
+   {symbol $in}
+}
 {new
    GHScreen
    permadeath_lives_screen
    DIALOG_SCREEN
    (enter
-      ;initial lives
-      {set $num_of_lives 3}
+      {gamecfg set_player 0 {profilemgr active_padnum}}
+      {gamecfg set mode career}
+      {if_else {campaign is_empty_profile 4}
+         ;if empty, store our initial live count
+         {set $num_of_lives 3}
+         ;load attempt count if exists
+         {set $num_of_lives {int {alph_to_num {symbol {campaign profile_name 4}}}}}
+      }
       ;panel handle btn1 btn2 default_sel bodymsg header
       {dialog setup confirm none button1 none gh2_permadeath}
       ;print live selection
@@ -34,8 +70,9 @@
             }
          )
          (kPad_X
-            {ui goto_screen permadeath_attempts_screen}
-            {synth play_sequence button_play}
+            {campaign set_profile_name {sprint {num_to_alph {sprint $num_of_lives}}} 4}
+            {autosave_goto permadeath_attempts_screen}
+            {synth play_sequence button_select}
          )
       }
       ;update life counter
@@ -47,24 +84,42 @@
    permadeath_attempts_screen
    DIALOG_SCREEN
    (enter
+      {if_else {campaign is_empty_profile 5}
+         ;if empty, store our initial attempt count
+         {set $this_attempts 0}
+         ;load attempt count if exists
+         {set $this_attempts {int {alph_to_num {symbol {campaign profile_name 5}}}}}
+      }
+      {if_else {campaign is_empty_profile 6}
+         ;if empty, store our initial note count
+         {set $highest_note_streak 0}
+         ;load note count if exists
+         {set $highest_note_streak {int {alph_to_num {symbol {campaign profile_name 6}}}}}
+      }
+      {if_else {campaign is_empty_profile 7}
+         ;if empty, store our initial fc count
+         {set $highest_songs_completed 0}
+         ;load fc count if exists
+         {set $highest_songs_completed {int {alph_to_num {symbol {campaign profile_name 7}}}}}
+      }
+      ;permadeath set initial values to int
+      {set $lives_lost {int 0}}
+      {set $temp_note_streak {int 0}}
+      {set $this_note_streak {int 0}}
+      {set $this_songs_completed {int 0}}
       ;panel handle btn1 btn2 default_sel bodymsg header
       {dialog setup continue lives button1 none gh2_permadeath}
       ;print welcome and stats
       {{dialog find dl_message.lbl} set_localized_text {sprintf {localize permadeath_welcome} $this_attempts $highest_note_streak $highest_songs_completed}})
    (SELECT_START_MSG
-      ;disable saving if never won
-      {set $autosave FALSE}
-      {set $disable_save TRUE}
-      ;add a new attempt count and reset streaks
-      {set $lives_lost {int 0}}
-      {set $this_note_streak {int 0}}
-      {set $this_songs_completed {int 0}}
       {switch
          $component
          (dl_button1.btn
-            ;go to the game (you lost)
-            {ui goto_screen main_screen}
-            {++ $this_attempts})
+            {++ $this_attempts}
+            {set $autosave TRUE}
+            {set $disable_save FALSE}
+            {ui goto_screen permadeath_save_screen}
+         )
          (dl_button2.btn
             ;go back and pick lives
             {ui goto_screen permadeath_lives_screen})
@@ -72,6 +127,28 @@
    )
 }
 
+{new
+   GHScreen
+   permadeath_save_screen
+   DIALOG_SCREEN
+   (enter
+      {campaign set_profile_name {sprint {num_to_alph {sprint $this_attempts}}} 5}
+      {campaign set_profile_name {sprint {num_to_alph {sprint $highest_note_streak}}} 6}
+      {campaign set_profile_name {sprint {num_to_alph {sprint $highest_songs_completed}}} 7}
+      {if $return_flow
+         {autosave_goto permadeath_lives_screen}
+      }
+      {if {! $return_flow}
+         ;go to the game (you lost)
+         {autosave_goto main_screen}
+         ;disable save on new attempt
+         {set $autosave FALSE}
+         {set $disable_save TRUE}
+      }
+      ;always restore return flow after this screen
+      {set $return_flow FALSE}
+   )
+}
 {new
    GHScreen
    permadeath_win_screen
@@ -84,6 +161,7 @@
          {{dialog find dl_message.lbl} set_localized_text {sprintf {localize permadeath_win_no_miss} $lives_lost $this_attempts $highest_note_streak $highest_songs_completed}}
          {{dialog find dl_message.lbl} set_localized_text {sprintf {localize permadeath_win} $lives_lost $this_attempts $highest_note_streak $highest_songs_completed}}
       }
+      ;allow saving, congrats
       {set $autosave TRUE}
       {set $disable_save FALSE})
    (SELECT_START_MSG
@@ -106,17 +184,32 @@
       ;print loss
       ;| || || |_
       {if_else {== $lives_lost {- $num_of_lives 1}}
-         {{dialog find dl_message.lbl} set_localized_text permadeath_lost_final}
+         {{dialog find dl_message.lbl} set_localized_text {localize permadeath_lost_final}}
          {{dialog find dl_message.lbl} set_localized_text {sprintf {localize permadeath_lost} {- $num_of_lives $lives_lost}}}
+      }
+      ;if we completely ran out of lives
+      {if {== $lives_lost $num_of_lives}
+         ;reenable saving to store our stats
+         {set $autosave TRUE}
+         {set $disable_save FALSE}
+         {{dialog find dl_message.lbl} set_localized_text {localize permadeath_lost_restart}}
+         ;hide buttons
+         {{dialog find dl_button1.btn} set_showing FALSE}
+         {{dialog find dl_button2.btn} set_showing FALSE}
       }
    )
    (SELECT_START_MSG
-      {switch
-         $component
-         (dl_button1.btn
-            {ui goto_screen sel_song_screen})
-         (dl_button2.btn
-            {ui goto_screen main_screen})
+      {if_else {== $lives_lost $num_of_lives}
+         ;save stats to file and restart flow
+         {ui goto_screen permadeath_save_screen}
+         ;we arent dead yet
+         {switch
+            $component
+            (dl_button1.btn
+               {ui goto_screen sel_song_screen})
+            (dl_button2.btn
+               {ui goto_screen main_screen})
+         }
       }
    )
 }

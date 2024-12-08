@@ -8,6 +8,8 @@
    "You missed.\nYou have %i lives remaining.")
 (permadeath_lost_final
    "You missed.\nThis is your final life.")
+(permadeath_lost_restart
+   "You Died.")
 (permadeath_win
    "Holy shit you did it!\nNow do it with less misses.\nLives lost: %i\nAttempts: %i\nTop Streak: %i\nTop FC streak: %i songs")
 (permadeath_win_no_miss

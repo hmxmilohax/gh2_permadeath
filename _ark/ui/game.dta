@@ -258,18 +258,15 @@
                {achievements
                   submit_coop_points
                   {band score}}}
-            ;permadeath track song completion metrics
+            ;beat a song, increment counter
             {if {!= {gamecfg get mode} practice}
                {++ $this_songs_completed}
+            }
+            ;permadeath track song completion metrics
+            {if {!= {gamecfg get mode} practice}
                {if {> $this_songs_completed $highest_songs_completed}
                   {set $highest_songs_completed $this_songs_completed}
                }
-            }
-            ;submit note streak if no lives lost
-            {set $this_note_streak {+ $this_note_streak $temp_note_streak}}
-            ;submit highest note streak
-            {if {> $this_note_streak $highest_note_streak}
-               {set $highest_note_streak $this_note_streak}
             }
             {track_panel explode}
             {play_game_sfx TRACK_EXPLODE_SFX}

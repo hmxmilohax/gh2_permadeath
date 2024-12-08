@@ -31,11 +31,4 @@
       {option_str budget_config $cfg}
       {track_budget setup $cfg}
       {set $first_screen track_budget}}}
-;permadeath set initial values to int
-{set $highest_note_streak 0}
-{set $highest_songs_completed 0}
-{set $this_note_streak 0}
-{set $this_songs_completed 0}
-{set $this_attempts 0}
-{set $temp_note_streak 0}
 {ui goto_screen $first_screen}

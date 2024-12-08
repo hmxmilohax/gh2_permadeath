@@ -1,23 +1,36 @@
+#define PAUSE_THE_GAME
+(
+   {beatmatch set_paused TRUE}
+   {world_panel set_paused TRUE}
+)
 #define LOST_THE_GAME
 (
    ;lost a life
    {++ $lives_lost}
    ;lives remain, go back to song_select/main menu
    {if {< $lives_lost $num_of_lives}
+      PAUSE_THE_GAME
       {meta_loading_goto permadeath_lost_screen}
    }
    ;no lives remain
    {if {== $num_of_lives $lives_lost}
-      ;delete all save files
-      {foreach_int $idx 0 MAX_NUM_PROFILES
+      ;delete all save files, besides our tracking ones
+      {foreach_int $idx 0 3
          {if {! {campaign is_empty_profile $idx}}
             {campaign delete_slot $idx}
          }
       }
-      ;submit final note streak
+      ;save stats
+      ;submit note streak if no lives lost
       {set $this_note_streak {+ $this_note_streak $temp_note_streak}}
+      ;submit highest note streak
+      {if {> $this_note_streak $highest_note_streak}
+         {set $highest_note_streak $this_note_streak}
+      }
       ;return to intro flow
-      {meta_loading_goto permadeath_lives_screen}
+      PAUSE_THE_GAME
+      {set $return_flow TRUE}
+      {meta_loading_goto permadeath_lost_screen}
    }
 )
 #define COMMON_CALLBACK_HANDLES
