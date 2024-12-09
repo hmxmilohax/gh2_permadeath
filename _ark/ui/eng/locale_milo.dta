@@ -1,7 +1,12 @@
 (num_lives
    "Number of lives: %i\nYour save will be deleted if you lose all of your lives.\n\nMissing will always exit a song.")
+#ifdef GAME_GH2
 (gh2_permadeath
    "GH2 Permadeath")
+#else
+(gh2_permadeath
+   "80s Permadeath")
+#endif
 (permadeath_welcome
    "Welcome (back)\nAttempts: %i\nTop Streak: %i\nTop FC streak: %i songs\nNo Strum Limit is enabled.")
 (permadeath_lost
