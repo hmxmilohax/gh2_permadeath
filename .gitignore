@@ -1,0 +1,28 @@
+.DS_Store
+*.pyc
+
+*.ark
+*.hdr
+*.iso
+
+#funny files that should never be committed
+.DS_Store
+*.pyc
+*.tmp
+*.ninja
+.ninja_log
+
+#vanilla files
+platform/gh2/xbox/*
+platform/gh2/ps2/*
+platform/gh80s/xbox/*
+platform/gh80s/ps2/*
+
+#ninja build dirs
+obj
+out
+
+#reference script unused by dx
+_ark/dx/reference
+
+reference

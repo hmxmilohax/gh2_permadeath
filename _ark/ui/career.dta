@@ -933,10 +933,7 @@
          {helpbar set_display $array}})
    (enter
       {$this set_focus st_guitars.btn}
-      {if_else
-         {profilemgr is_active_pad_signed_in}
-         {$this enable st_downloads.btn}
-         {$this disable st_downloads.btn}}
+      {$this disable st_downloads.btn}
       {$this set_store_mode TRUE}
       {$this show_store_screen_1}
       {$this update_store_category_desc}
