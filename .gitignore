@@ -13,7 +13,10 @@
 .ninja_log
 
 #vanilla files
-platform/*
+platform/gh2/xbox/*
+platform/gh2/ps2/*
+platform/gh80s/xbox/*
+platform/gh80s/ps2/*
 
 #ninja build dirs
 obj
