@@ -3,6 +3,7 @@
    {if
       {&&
          #ifdef HX_XBOX
+         {campaign is_song_passed dead}
          {campaign is_song_passed hush}
          {campaign is_song_passed possum}
          {campaign is_song_passed salvation}

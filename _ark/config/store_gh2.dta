@@ -152,6 +152,8 @@
    (yeswecan
       (price 550))
    #ifdef HX_XBOX
+   (dead
+      (price 0))
    (hush
       (price 0))
    (possum
