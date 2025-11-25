@@ -90,9 +90,11 @@ Auto-Calibration works! And it works way better than it did in vanilla GH2, prov
 
 # Credits
 
-jnack - lead dta dev  
-lunalawl - calibration overhaul, QA  
-Zeddikins - executable patches (audio offset/strum limit/rb strat patch)  
+jnack - Lead DTA Dev  
+lunalawl - Calibration Overhaul, QA  
+Zeddikins - Executable Patches (audio offset/strum limit/rb strat patch)  
+Lynxception - Spanish Translation
+Carl Mylo - Spanish Translation
 InvoxiPlaysGames - Consultation  
 TheNathannator - Consultation  
 Sulfrix - Consultation  

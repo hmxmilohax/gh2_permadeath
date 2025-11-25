@@ -306,6 +306,19 @@
    }
    #endif
 )
+(endgame_encore_freebird1
+   #ifdef GAME_GH2
+   {if_else $randomizer
+      "Looks like the time has come. They're chanting for ??????????. You knew it would happen one day. You wanna do this?"
+      "Looks like the time has come. They're chanting for Free Bird. You knew it would happen one day. You wanna do this?"
+   }
+   #else
+   {if_else $randomizer
+      "The crowd is goin' insane. You know what they wanna hear: the MOST EXCELLENT super-shredder track, ???????????. You ready?"
+      "The crowd is goin' insane. You know what they wanna hear: the MOST EXCELLENT super-shredder track, Play With Me. You ready?"
+   }
+   #endif
+)
 (finalsong_confirm1
    #ifdef GAME_GH2
    {if_else $randomizer
@@ -333,6 +346,45 @@
    #endif
 )
 (finalsong_confirm3
+   #ifdef GAME_GH2
+   {if_else $randomizer
+      "Okay, last chance... \nYou really want to play ???????????"
+      "Okay, last chance... \nYou really want to play Free Bird?"
+   }
+   #else
+   {if_else $randomizer
+      "Okay, last chance... \nYou really want to rock ????????????"
+      "Okay, last chance... \nYou really want to rock Play With Me?"
+   }
+   #endif
+)
+(freebird_confirm1
+   #ifdef GAME_GH2
+   {if_else $randomizer
+      "Wait, you really want to play ??????????"
+      "Wait, you really want to play Free Bird?"
+   }
+   #else
+   {if_else $randomizer
+      "This ain't for the faint of heart, buddy. \nYou really want to try ????????????"
+      "This ain't for the faint of heart, buddy. \nYou really want to try Play With Me?"
+   }
+   #endif
+)
+(freebird_confirm2
+   #ifdef GAME_GH2
+   {if_else $randomizer
+      "This move can only be pulled off by a TRUE ???????????! \nYou still game?"
+      "This move can only be pulled off by a TRUE hero! \nYou still game?"
+   }
+   #else
+   {if_else $randomizer
+      "Seriously, it's, like, TOTALLY hard. \nYou still game?"
+      "Seriously, it's, like, TOTALLY hard. \nYou still game?"
+   }
+   #endif
+)
+(freebird_confirm3
    #ifdef GAME_GH2
    {if_else $randomizer
       "Okay, last chance... \nYou really want to play ???????????"

@@ -32,9 +32,6 @@
       {if {== $accuracy_threshold_elem 0}
          {++ $temp_note_streak}
       }
-      ;TAKE THIS OUT
-      ;{handle (player0 win 5)}
-      ;TAKE THIS OUT
       {$this first_note}
    )
    (gem_miss_callback
@@ -44,7 +41,7 @@
          }
       }
    )
-   (gem_pass_callback ;TAKE THIS OUT
+   (gem_pass_callback
       {$this first_note}
       {if {== $accuracy_threshold_elem 0}
          LOST_THE_GAME

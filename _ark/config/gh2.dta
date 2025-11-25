@@ -11,7 +11,7 @@
       #include system_script.dta
    )
    #ifdef HX_EE
-   (language (force eng))
+   (language (force ''))
    #endif
    (iop_modules
       (iop/scrtchpd.irx)
