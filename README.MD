@@ -16,7 +16,7 @@ Accessibility and ways to keep it fresher, without obscuring the vision of the o
 * Supports Vanilla GH2 and the mod [Guitar Hero 80s 360](https://github.com/hmxmilohax/guitar-hero-encore-xbox) on Xbox 360
 * Toggleable Permadeath mode (See [#permadeath_information](#permadeath_information))
 * Permadeath stats overlay in song select and endgame
-* Custom thresholds for permadeath wins
+* Custom accuracy (80%-99.9%) thresholds for permadeath wins
 * Selectable Lives amounts for permadeath
 * Toggleable Randomizer mode (See [#randomizer_information](#randomizer_information))
 * Toggleable Strum limit (See [#strum_limit_information](#strum_limit_information))
