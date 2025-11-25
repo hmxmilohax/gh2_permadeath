@@ -14,6 +14,7 @@ Accessibility and ways to keep it fresher, without obscuring the vision of the o
 
 * Supports Vanilla GH2 and Vanilla GH80s on PS2
 * Supports Vanilla GH2 and the mod [Guitar Hero 80s 360](https://github.com/hmxmilohax/guitar-hero-encore-xbox) on Xbox 360
+* Built off GH80s on ps2, meaning hopo fix already included
 * Toggleable Permadeath mode (See [#permadeath_information](#permadeath_information))
 * Permadeath stats overlay in song select and endgame
 * Custom accuracy (80%-99.9%) thresholds for permadeath wins

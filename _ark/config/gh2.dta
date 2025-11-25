@@ -10,9 +10,7 @@
    (init
       #include system_script.dta
    )
-   #ifdef HX_EE
    (language (force ''))
-   #endif
    (iop_modules
       (iop/scrtchpd.irx)
       (iop/sio2man.irx)
