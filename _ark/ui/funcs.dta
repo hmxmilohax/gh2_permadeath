@@ -24,7 +24,19 @@
       #endif
    }
 }
-
+{func goto_startup_load
+   ;set initial screen for create a save to our custom screen
+   {set $mc_return_screen permadeath_options_screen}
+   {set $autosave TRUE}
+   #ifdef HX_XBOX
+   {if_else {profilemgr is_active_pad_signed_in}
+      {ui goto_screen startup_load_finder_screen}
+      {ui goto_screen startup_signin_screen}
+   }
+   #else
+   {ui goto_screen bootup_load}
+   #endif
+}
 {func save_calibration
    #ifdef HX_XBOX
    {do

@@ -110,11 +110,8 @@
          {profilemgr set_active_pad_from_player $player_num}
          {gamecfg set_player 0 {profilemgr active_padnum}}
          {ui set_virtual_dpad TRUE}
-         {goto_startup_load}
-         #else
-         {set $autosave TRUE}
-         {ui goto_screen permadeath_options_screen}
          #endif
+         {goto_startup_load}
       }
    )
 }
