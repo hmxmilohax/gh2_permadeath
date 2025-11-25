@@ -14,6 +14,10 @@ jobs:
       # 2) Build base ark for patchcreator (using native linux exe, if available)
       - name: Build fake ark
         run: |
+          mkdir -p ./platform
+          mkdir -p ./platform/gh2
+          mkdir -p ./platform/gh2/ps2
+          mkdir -p ./platform/gh2/ps2/GEN
           truncate -s 78602 platform/gh2/ps2/GEN/MAIN.HDR
           truncate -s 3118656871 platform/gh2/ps2/GEN/MAIN_0.ARK
           truncate -s 3575088 platform/gh2/ps2/SLUS_214.47
@@ -47,7 +51,11 @@ jobs:
       # 2) Build base ark for patchcreator (using native linux exe, if available)
       - name: Build fake ark
         run: |
-          truncate -s 76105 platform/gh2/gh80s/GEN/MAIN.HDR
+          mkdir -p ./platform
+          mkdir -p ./platform/gh80s
+          mkdir -p ./platform/gh80s/ps2
+          mkdir -p ./platform/gh80s/ps2/GEN
+          truncate -s 76105 platform/gh80s/ps2/GEN/MAIN.HDR
           truncate -s 1837761590 platform/gh80s/ps2/GEN/MAIN_0.ARK
           truncate -s 3575088 platform/gh80s/ps2/SLUS_215.86
 
