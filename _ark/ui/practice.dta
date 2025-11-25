@@ -14,6 +14,20 @@
    (sel_song_career FALSE)
    (enter {gamecfg set practice_speed 0})
    (SELECT_START_MSG {ui goto_screen practice_selpart_screen} kDataUnhandled)
+   (BUTTON_DOWN_MSG
+      {switch $button
+         (kPad_Tri
+            {if {== {practice_sel_section_screen get career_mode} TRUE}
+               {career_screen resume_from_practice}
+               {ui goto_screen career_screen}
+            }
+            {if {== {practice_sel_section_screen get career_mode} FALSE}
+               {ui goto_screen main_screen}
+            }
+         )
+         kDataUnhandled
+      }
+   )
 }
 {new GHPanel
    practice_selpart_panel
