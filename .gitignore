@@ -2,7 +2,6 @@
 *.pyc
 
 *.ark
-*.hdr
 *.iso
 
 #funny files that should never be committed
