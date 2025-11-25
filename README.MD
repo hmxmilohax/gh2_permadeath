@@ -25,7 +25,7 @@ Accessibility and ways to keep it fresher, without obscuring the vision of the o
 * Xbox 360 compatibility with Xbox 360 Rock Band type guitars
 * Toggleable Force all as guitar (See [#force_guitar_information](#force_guitar_information))
 * Toggleable DLC scanning for gh2 xbox
-* Bass/rythmn in quickplay
+* Bass/rhythm in quickplay
 * Select part screen in place of select diff in quickplay (with an extra button for diff on the same screen)
 * PS2 campaign order for GH2 Xbox 360
 * Xbox 360 exclusives in the shop (not present on ps2 at all)
