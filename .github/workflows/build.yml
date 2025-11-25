@@ -91,8 +91,8 @@ jobs:
           mkdir -p ./platform
           mkdir -p ./platform/gh2
           mkdir -p ./platform/gh2/xbox
-          mkdir -p ./platform/gh2/xbox/GEN
-          cp ./dependencies/clean_hdr/gh2/xbox/main.hdr ./platform/gh2/xbox/GEN/main.hdr
+          mkdir -p ./platform/gh2/xbox/gen
+          cp ./dependencies/clean_hdr/gh2/xbox/main.hdr ./platform/gh2/xbox/gen/main.hdr
           truncate -s 2112260247 platform/gh2/xbox/gen/main_0.ark
           truncate -s 9117696 platform/gh2/xbox/default.xex
 
