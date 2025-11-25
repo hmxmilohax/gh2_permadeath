@@ -78,3 +78,77 @@ jobs:
         with:
           name: 80SGYM_PS2_DIY
           path: out/gh80s/ps2
+
+  build_gh2_xbox:
+    runs-on: ubuntu-latest
+    steps:
+      # 1) Check out this main repo
+      - uses: actions/checkout@v4
+
+      # 2) Build base ark for patchcreator (using native linux exe, if available)
+      - name: Build fake ark
+        run: |
+          mkdir -p ./platform
+          mkdir -p ./platform/gh2
+          mkdir -p ./platform/gh2/xbox
+          mkdir -p ./platform/gh2/xbox/GEN
+          cp ./dependencies/clean_hdr/gh2/xbox/main.hdr ./platform/gh2/xbox/GEN/main.hdr
+          truncate -s 2112260247 platform/gh2/xbox/gen/main_0.ark
+          truncate -s 9117696 platform/gh2/xbox/default.xex
+
+      # 3) Set up Python 3.11
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 4) Build ARK (native)
+      - name: Build ARK
+        run: |
+          pip install pillow
+          python dependencies/python/configure_build.py xbox gh2
+          ./dependencies/linux/ninja
+
+      # 5) Upload the final artifact
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: GH2GYM_XBOX_DIY
+          path: out/gh2/xbox
+
+  build_80s_xbox:
+    runs-on: ubuntu-latest
+    steps:
+      # 1) Check out this main repo
+      - uses: actions/checkout@v4
+
+      # 2) Build base ark for patchcreator (using native linux exe, if available)
+      - name: Build fake ark
+        run: |
+          mkdir -p ./platform
+          mkdir -p ./platform/gh80s
+          mkdir -p ./platform/gh80s/xbox
+          mkdir -p ./platform/gh80s/xbox/gen
+          cp ./dependencies/clean_hdr/gh80s/xbox/main.hdr ./platform/gh80s/xbox/gen/main.hdr
+          truncate -s 1368365443 platform/gh80s/xbox/gen/main_0.ark
+          truncate -s 9117696 platform/gh80s/xbox/default.xex
+
+      # 3) Set up Python 3.11
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 4) Build ARK (native)
+      - name: Build ARK
+        run: |
+          pip install pillow
+          python dependencies/python/configure_build.py xbox gh80s
+          ./dependencies/linux/ninja
+
+      # 5) Upload the final artifact
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: 80SGYM_XBOX_DIY
+          path: out/gh80s/xbox
