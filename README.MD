@@ -31,6 +31,7 @@ Accessibility and ways to keep it fresher, without obscuring the vision of the o
 * Xbox 360 exclusives in the shop (not present on ps2 at all)
 * Auto unlock all multiplayer basses
 * All region and platform specific cheat codes available
+* Auto enable Hyperspeed on main menu entry
 * Default to Expert in select difficulty screens
 * Confirm to restart/quit for ps2 from xbox
 * Pause to practice mode shortcut
