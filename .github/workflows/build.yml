@@ -2,7 +2,12 @@ name: CI
 
 on:
   push:
+    branches:
+      - main
   pull_request:
+
+permissions:
+  contents: write
 
 jobs:
   build_gh2_ps2:
@@ -152,3 +157,36 @@ jobs:
         with:
           name: 80SGYM_XBOX_DIY
           path: out/gh80s/xbox
+
+  release:
+    needs:
+      - build_gh2_ps2
+      - build_80s_ps2
+      - build_gh2_xbox
+      - build_80s_xbox
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+
+      - name: Create archives
+        run: |
+          cd dist
+          for dir in */ ; do
+            dir="${dir%/}"
+            zip -r "../${dir}.zip" "$dir"
+          done
+
+      - name: Create or update prerelease
+        uses: ncipollo/release-action@v1
+        with:
+          tag: nightly
+          name: Nightly build
+          prerelease: true
+          allowUpdates: true
+          artifacts: "*.zip"
+          artifactErrorsFailBuild: true
+          token: ${{ secrets.GITHUB_TOKEN }}
