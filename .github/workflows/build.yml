@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - randomizer
   pull_request:
 
 permissions:
