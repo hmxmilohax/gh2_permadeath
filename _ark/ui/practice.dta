@@ -14,20 +14,6 @@
    (sel_song_career FALSE)
    (enter {gamecfg set practice_speed 0})
    (SELECT_START_MSG {ui goto_screen practice_selpart_screen} kDataUnhandled)
-   (BUTTON_DOWN_MSG
-      {switch $button
-         (kPad_Tri
-            {if {== {practice_sel_section_screen get career_mode} TRUE}
-               {career_screen resume_from_practice}
-               {ui goto_screen career_screen}
-            }
-            {if {== {practice_sel_section_screen get career_mode} FALSE}
-               {ui goto_screen main_screen}
-            }
-         )
-         kDataUnhandled
-      }
-   )
 }
 {new GHPanel
    practice_selpart_panel
@@ -158,6 +144,15 @@
                {practice_sel_section_screen get career_mode}}
             {career_screen resume_from_practice}
             {ui goto_screen career_screen}
+            TRUE
+         )
+         ({&&
+               {== $button kPad_Tri}
+               {==
+                  [section]
+                  0}
+               {! {practice_sel_section_screen get career_mode}}}
+            {meta_loading_nosave_goto main_screen}
             TRUE
          )
          ({&&
@@ -387,7 +382,15 @@
          )
          (new_sec.btn {meta_loading_nosave_goto practice_sel_section_screen})
          (new_sec_career.btn {meta_loading_goto practice_sel_section_screen})
-         (new_song.btn {meta_loading_nosave_goto practice_selsong_screen})
+         (new_song.btn
+            {if_else {practice_sel_section_screen get career_mode}
+               {do
+                  {gamecfg set mode career}
+                  {meta_loading_nosave_goto career_screen}
+               }
+               {meta_loading_nosave_goto practice_selsong_screen}
+            }
+         )
          (quit.btn {meta_loading_nosave_goto main_screen})
          (quit_career.btn
             {career_screen resume_from_practice}

@@ -224,7 +224,6 @@
       #endif
    )
    (resume_from_practice
-      {practice_sel_section_screen set career_mode FALSE}
       {gamecfg set mode career}
       {gamecfg set continue_screen sel_song_screen}
    )

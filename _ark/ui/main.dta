@@ -11,6 +11,7 @@
    (enter
       {set $main_entered TRUE}
       {set $leaderboards_mode FALSE}
+      {practice_sel_section_screen set career_mode FALSE}
       {$this reset_player_settings}
       {if {! [already_entered]}
          {synth play_sequence meta_lick}

@@ -395,12 +395,12 @@
    )
    (goto_practice_mode ;from gh2dx 360
       {set $cal_from_pause FALSE}
-      {gamecfg set mode practice}
-      {gamecfg set_track 0 0}
-      {if_else {== career {gamecfg get mode}}
+      {if_else {== {gamecfg get mode} career}
          {practice_sel_section_screen set career_mode TRUE}
          {practice_sel_section_screen set career_mode FALSE}
       }
+      {gamecfg set mode practice}
+      {gamecfg set_track 0 0}
       {meta_loading_goto practice_sel_section_screen}
    )
    (SELECT_START_MSG
