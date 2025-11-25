@@ -110,6 +110,9 @@
 (scythe_shop_desc
    "Ever felt like shredding with the souls of the undead? Slice a slick solo, and the goth girls will be screaming for beelzebub."
 )
+(scythe_desc
+   "Ever felt like shredding with the souls of the undead? Slice a slick solo, and the goth girls will be screaming for beelzebub."
+)
 (guitar_red_octane
    "RedOctane SG"
 )
@@ -119,7 +122,7 @@
 (guitar_red_octane_desc
    "Wait a second, this was really in the game this whole time? Yes it was."
 )
-(scythe_desc
+(guitar_red_octane
    "Wait a second, this was really in the game this whole time? Yes it was."
 )
 (dead "Dead!")

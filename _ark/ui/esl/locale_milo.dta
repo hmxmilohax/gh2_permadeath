@@ -110,6 +110,9 @@
 (scythe_shop_desc
    "¿Alguna vez has soñado con tocar música usando las almas de inocentes? Aniquila solos con esta hacha mortífera y las góticas gritarán tu nombre."
 )
+(scythe_desc
+   "¿Alguna vez has soñado con tocar música usando las almas de inocentes? Aniquila solos con esta hacha mortífera y las góticas gritarán tu nombre."
+)
 (guitar_red_octane
    "SG de RedOctane"
 )
@@ -119,7 +122,7 @@
 (guitar_red_octane_desc
    "Espera, ¿esto siempre estuvo en los archivos del juego? Sí, lo estuvo."
 )
-(scythe_desc
+(guitar_red_octane
    "Espera, ¿esto siempre estuvo en los archivos del juego? Sí, lo estuvo."
 )
 (dead "Dead!")
