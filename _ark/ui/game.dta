@@ -75,7 +75,7 @@
       #ifdef GAME_GH2
       {if
          {&&
-            {== {game get_venue} small1}
+            {== {game get_venue} battle}
             {&& {== {game want_encore_fx} TRUE} {== {gamecfg get_song} tonightimgonna}}
          }
          {{{world_panel loaded_dir} find drummer} show_drummer}
@@ -163,7 +163,7 @@
             #ifdef GAME_GH2
             {if
                {&&
-                  {== {game get_venue} small1}
+                  {== {game get_venue} battle}
                   {&& {== {game want_encore_fx} TRUE} {== {gamecfg get_song} tonightimgonna}}
                }
                {do
