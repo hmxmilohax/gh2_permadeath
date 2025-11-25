@@ -4,6 +4,7 @@ from pathlib import Path
 import sys
 import argparse
 import os
+import shutil  # for directory removal
 
 from PIL import Image, ImageFilter
 
@@ -81,6 +82,11 @@ print(f"Platform: {args.platform}, Game: {args.game}")
 
 # configure tools
 ark_dir = Path("obj", args.game, args.platform, "ark")
+
+# ALWAYS remove obj/.../ark/ui/image to avoid stale images
+stale_image_dir = ark_dir / "ui" / "image"
+shutil.rmtree(stale_image_dir, ignore_errors=True)
+
 match sys.platform:
     case "win32":
         ninja.variable("silence", ">nul")
@@ -204,33 +210,60 @@ for f in filter(ark_file_filter, Path("_ark").rglob("*")):
             )
 
             serialize_output = serialize_directory.joinpath(target_filename)
-            encryption_output = output_directory.joinpath(target_filename)
             stamp = serialize_directory.joinpath(stamp_filename)
-            ninja.build(str(stamp), "dtacheck", str(f))
+
+            # By default, use the source file directly
+            src_dta = f
+
+            # Special-case: patch _ark/config/gh2.dta per game without touching the source
+            if args.game in ("gh2", "gh80s") and f == Path("_ark", "config", "gh2.dta"):
+                patched_dta = Path(
+                    "obj",
+                    args.game,
+                    args.platform,
+                    "patched_dta",
+                    *f.parent.parts[1:],
+                    f.name,
+                )
+                patched_dta.parent.mkdir(parents=True, exist_ok=True)
+
+                with open(f, "r", encoding="utf-8") as src_file:
+                    lines = src_file.readlines()
+
+                if len(lines) >= 2:
+                    if args.game == "gh2":
+                        lines[1] = "#define GAME_GH2 (TRUE)\n"
+                    elif args.game == "gh80s":
+                        lines[1] = ";#define GAME_GH2 (TRUE)\n"
+
+                with open(patched_dta, "w", encoding="utf-8") as dst_file:
+                    dst_file.writelines(lines)
+
+                src_dta = patched_dta
+
+            ninja.build(str(stamp), "dtacheck", str(src_dta))
             ninja.build(
                 str(serialize_output),
                 "dtab_serialize",
-                str(f),
+                str(src_dta),
                 implicit=[str(stamp), "_always"],
             )
+
+            encryption_output = output_directory.joinpath(target_filename)
             ninja.build(str(encryption_output), "dtab_encrypt", str(serialize_output))
             ark_files.append(str(encryption_output))
         case _:
             index = f.parts.index("_ark")
-            out_path = Path("obj", args.game, args.platform, "ark").joinpath(*f.parts[index + 1 :])
+            rel_parts = list(f.parts[index + 1 :])
+
+            # GH80s: remap /_ark/ui/image_80s/... -> obj/.../ark/ui/image/...
+            if args.game == "gh80s":
+                if len(rel_parts) >= 2 and rel_parts[0] == "ui" and rel_parts[1] == "image_80s":
+                    rel_parts[1] = "image"
+
+            out_path = Path("obj", args.game, args.platform, "ark").joinpath(*rel_parts)
             ninja.build(str(out_path), "copy", str(f))
             ark_files.append(str(out_path))
-
-# write version info
-#dta = Path("obj", args.platform, "raw", "dx", "locale", "dx_version.dta")
-#dtb = Path("obj", args.platform, "raw", "dx", "locale", gen_folder, "dx_version.dtb")
-#enc = Path("obj", args.platform, "ark", "dx", "locale", gen_folder, "dx_version.dtb")
-
-#ninja.build(str(dta), "version", implicit="_always")
-#ninja.build(str(dtb), "dtab_serialize", str(dta))
-#ninja.build(str(enc), "dtab_encrypt", str(dtb))
-
-#ark_files.append(str(enc))
 
 # build ark
 ark_part = "0"

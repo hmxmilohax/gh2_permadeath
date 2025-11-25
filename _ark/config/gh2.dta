@@ -1,11 +1,18 @@
 #include macros.dta
 #define GAME_GH2 (TRUE)
 (mem
-   #include mem.dta)
+   #include mem.dta
+)
 (system
+   #ifdef HX_XBOX
    (ng TRUE)
+   #endif
    (init
-      #include system_script.dta)
+      #include system_script.dta
+   )
+   #ifdef HX_EE
+   (language (force eng))
+   #endif
    (iop_modules
       (iop/scrtchpd.irx)
       (iop/sio2man.irx)
@@ -16,9 +23,7 @@
       (iop/usbkb.irx FALSE)
       #else
       (iop/usbd.irx)
-      (iop/usbkb.irx
-         "keybd=1"
-         "debug=0")
+      (iop/usbkb.irx "keybd=1" "debug=0")
       #endif
       (iop/padman.irx)
       (iop/msifrpc.irx)
@@ -29,88 +34,147 @@
       #endif
       (iop/libsd.irx)
       (iop/sdrdrv.irx)
-      (iop/cdvdstm.irx))
+      (iop/cdvdstm.irx)
+   )
    #ifdef _SHIP
-   (keyboard
-      (disable TRUE))
-   (multitap
-      (disable TRUE))
+   (keyboard (disable TRUE))
+   (multitap (disable TRUE))
    #endif
-   (xbox_map_file
-      "gh2_%s.map"))
+   (xbox_map_file "gh2_%s.map")
+)
 (synth
-   #include synth.dta)
+   #include synth.dta
+)
 (joypad
    (ignore)
-   (hold_ms 1000)
-   (repeat_ms 80))
+   (hold_ms 300)
+   (repeat_ms 50)
+)
 (spew
-   #include spew.dta)
-#define NON_GAME_TIMERS
-(world hud track file_read tasks)
+   #include spew.dta
+)
+#define NON_GAME_TIMERS (
+   world
+   hud
+   track
+   file_read
+   #ifdef HX_EE
+   end_draw
+   #endif
+   tasks
+)
 (timer NON_GAME_TIMERS game cpu gs)
 (rnd
-   (title
-      "Guitar Hero 2")
+   (title "Guitar Hero 2")
+   #ifdef HX_EE
+   (show_timers FALSE)
+   #endif
    (overlays
       (time
          (lines 1)
          (showing FALSE)
-         (color 0 0 0 0.7))
+         (color 0 0 0 0.7)
+      )
       (cheats
          (lines 1)
          (showing FALSE)
-         (color 0 0 0 0.7))
+         (color 0 0 0 0.7)
+      )
       (camera
          (lines 4)
          (showing FALSE)
-         (color 0 0 0 0.5))
+         (color 0 0 0 0.5)
+      )
+      #ifdef HX_EE
+      (light_preset
+         (lines 4)
+         (showing FALSE)
+         (color 0 0 0 0.5)
+      )
+      #endif
       (score
          (lines 15)
-         (showing FALSE))
+         (showing FALSE)
+      )
+      #ifdef HX_XBOX
       (char_status
          (lines 1)
-         (showing FALSE))
+         (showing FALSE)
+      )
       (char_history
          (lines 3)
-         (showing FALSE))
+         (showing FALSE)
+      )
+      #else
+      (guitar
+         (lines 1)
+         (showing FALSE)
+      )
+      (guitarist0_status
+         (lines 1)
+         (showing FALSE)
+      )
+      (guitarist0_history
+         (lines 3)
+         (showing FALSE)
+      )
+      #endif
       (player0_freestyle
          (lines 1)
-         (showing FALSE))
+         (showing FALSE)
+      )
       (score_debug
          (lines 1)
-         (showing FALSE))
+         (showing FALSE)
+      )
       (lights
          (lines 1)
-         (showing FALSE))
+         (showing FALSE)
+      )
       (camtest
          (lines 1)
-         (showing FALSE))
+         (showing FALSE)
+      )
       (transition_test
          (lines 1)
-         (showing FALSE)))
+         (showing FALSE)
+      )
+   )
+   #ifdef HX_XBOX
    (gamma 0.8)
+   #endif
    (timer_script
       {do
          ($tot 0)
-         {foreach
-            $t
-            (NON_GAME_TIMERS)
-            {set
-               $tot
-               {'+'
-                  $tot
-                  {timer_ms $t}}}}
-         {set_timer_ms
-            game
-            {-
-               {timer_ms cpu}
-               $tot}}}))
+         {foreach $t (NON_GAME_TIMERS)
+            {set $tot {'+' $tot {timer_ms $t}}}
+         }
+         {set_timer_ms game {- {timer_ms cpu} $tot}}
+      }
+   )
+)
 (ui
-   #include ../ui/ui.dta)
+   #include ../ui/ui.dta
+)
 (objects
-   #include objects.dta)
-(locale ../ui/eng/locale_milo.dta #ifndef GAME_GH2 ../ui/eng/locale_xbox.dta #endif ../ui/eng/locale.dta)
+   #include objects.dta
+)
+(locale
+   ../ui/eng/locale_milo.dta
+   ../ui/eng/locale_shared.dta
+   ../ui/eng/locale_extra.dta
+   ../ui/eng/locale_random_vanilla.dta
+   #ifdef HX_XBOX
+   ../ui/eng/locale_xbox.dta
+   #else
+   ../ui/eng/locale_ps2.dta
+   #endif
+   #ifdef GAME_GH2
+   ../ui/eng/locale_gh2.dta
+   #else
+   ../ui/eng/locale_80s.dta
+   #endif
+)
 #ifdef GAME_GH2
 (venues battle small1 small2 big theatre fest arena stone)
 #else
@@ -118,110 +182,133 @@
 #endif
 (default_band metal_singer metal_bass metal_drummer)
 (quick_cheats
-   #include cheats.dta)
+   #include cheats.dta
+)
 (long_cheats
-   #include long_cheats.dta)
+   #include long_cheats.dta
+)
 (beatmatcher
-   #include beatmatcher.dta)
+   #include beatmatcher.dta
+)
 (beatmatch
-   #include beatmatch.dta)
+   #include beatmatch.dta
+)
 (modes
-   #include modes.dta)
+   #include modes.dta
+)
 (player
-   #include player.dta)
+   #include player.dta
+)
 (track
-   #include track.dta)
+   #include track.dta
+)
 (scoring
-   #include scoring.dta)
+   #include scoring.dta
+)
 (track_graphics
-   #include track_graphics.dta)
+   #include track_graphics.dta
+)
+(song_bank) ;clean storage of all songs in game, in order
+(mapped_songs) ;storage to hold randomized songs at runtime
 (songs
-   #include songs.dta)
+   #ifdef GAME_GH2
+   #ifdef HX_XBOX
+   #include songs_gh2.dta
+   #else
+   #include songs_gh2_ps2.dta
+   #endif
+   #else
+   #include songs_80s.dta
+   #endif
+   #include tutorial_data.dta
+)
+(songs_real
+   #ifdef GAME_GH2
+   #ifdef HX_XBOX
+   #include songs_gh2.dta
+   #else
+   #include songs_gh2_ps2.dta
+   #endif
+   #else
+   #include songs_80s.dta
+   #endif
+)
 (sound
-   #include sound.dta)
+   #include sound.dta
+)
 (hud
-   (lead_meter
-      (max_lead 10000))
+   (lead_meter (max_lead 10000))
    (message_show_time 3)
    (sp_deploy_msg_delay 1.5)
-   (sp_deploy_repeat_delay 7))
+   (sp_deploy_repeat_delay 7)
+)
 (guitars
-   #include guitars.dta)
+   #include guitars.dta
+)
 #ifdef GAME_GH2
 (characters
-   (punk
-      (punk1)
-      (punk2))
-   (alterna
-      (alterna1)
-      (alterna2))
-   (glam
-      (glam1)
-      (glam2))
-   (goth
-      (goth2)
-      (goth1))
-   (metal
-      (metal1)
-      (metal2))
-   (rockabill
-      (rockabill1)
-      (rockabill2))
-   (rock
-      (rock2)
-      (rock1))
-   (deathmetal
-      (deathmetal1)
-      (deathmetal2))
-   (classic
-      (classic))
-   (funk1
-      (funk1))
-   (grim
-      (grim)))
+   (punk (punk1) (punk2))
+   (alterna (alterna1) (alterna2))
+   (glam (glam1) (glam2))
+   (goth (goth2) (goth1))
+   (metal (metal1) (metal2))
+   (rockabill (rockabill1) (rockabill2))
+   (rock (rock2) (rock1))
+   (deathmetal (deathmetal1) (deathmetal2))
+   (classic (classic))
+   (funk1 (funk1))
+   (grim (grim))
+)
 #else
-(characters
-   (punk
-      (punk1)
-      (punk2))
-   (alterna
-      (alterna1)
-      (alterna2))
-   (glam
-      (glam1)
-      (glam2))
-   (goth
-      (goth2)
-      (goth1))
-   (metal
-      (metal1)
-      (metal2))
-   (grim
-      (grim)))
+   #ifdef HX_XBOX
+   (characters
+      (punk (punk1) (punk2))
+      (alterna (alterna1) (alterna2))
+      (glam (glam1) (glam2))
+      (goth (goth2) (goth1))
+      (metal (metal1) (metal2))
+      (grim (grim))
+   )
+   #else
+   (characters
+      (punk (punk1))
+      (alterna (alterna1))
+      (glam (glam1))
+      (goth (goth2))
+      (metal (metal1))
+      (grim (grim))
+   )
+   #endif
 #endif
 (mc
-   #include mc.dta)
+   #include mc.dta
+)
 (store
-   #ifdef GAME_GH2
-   #include store_gh2.dta
-   #else
-   #include store_80s.dta
-   #endif)
+   #include store.dta
+)
 (campaign
    #ifdef GAME_GH2
    #include campaign_gh2.dta
    #else
    #include campaign_80s.dta
-   #endif)
+   #endif
+)
 (downloads)
 (tips
-   #include tips.dta)
+   #include tips.dta
+)
 (version
-   #include gh2_version.dta)
+   #include gh2_version.dta
+)
+#ifdef HX_XBOX
 (achievements
-   #include achievements.dta)
+   #include achievements.dta
+)
 (leaderboards
-   #include leaderboards.dta)
+   #include leaderboards.dta
+)
 (contexts
-   #include contexts.dta)
+   #include contexts.dta
+)
+#endif
 #merge ../../../system/run/config/default.dta
