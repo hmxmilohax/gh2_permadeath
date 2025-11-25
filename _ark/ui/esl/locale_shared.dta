@@ -1290,7 +1290,7 @@
 (deploy_star "¡UTILIZA LA ENERGÍA ESTRELLA!")
 (METALOADING "CARGANDO")
 (loading_tip1
-   "Atrévete con los Hammer-ons y los Pull-offs. Funcionan de verdad. Te lo prometemos."
+   "Prueba la nueva calibración, prometemos que ahora realmente funciona, en serio."
 )
 (loading_tip2
    "Toca 10 notas seguidas y multiplicarás tus puntos x2. Cuanto más larga sea la racha, mayor será el multiplicador."
@@ -1317,16 +1317,16 @@
    "Puedes ralentizar las canciones y algunas secciones de canciones en el modo práctica. ¡Por ejemplo, los solos perfectos que no te salen ni a tiros!"
 )
 (loading_tip10
-   "Asegúrate de que te has conectado a Xbox Live si quieres comprobar tu puntuación en las Tablas de clasificación."
+   "Algunos televisores de alta definición (HDTV) tienen un retraso entre el sonido y la imagen que pueden afectar a la jugabilidad. Si tienes este problema, visita la opción \qCalibrar retraso\q de la Configuración gráfica en el menú Opciones."
 )
 (loading_tip11
    "Visita el modo práctica desde el menú Ensayo para perfeccionar las partes más difíciles."
 )
 (loading_tip12
-   "No te preocupes por el nivel de dificultad al intentar mejorar la puntuación en el modo carrera, consigue la puntuación más alta que puedas y punto."
+   "Atrévete con los Hammer-ons y los Pull-offs. Funcionan de verdad. Te lo prometemos."
 )
 (loading_tip13
-   "¡Comprueba tu puntuación en las Tablas de clasificación! A lo mejor descubres que necesitas mejorar tus conocimientos de guitarra."
+   "No te preocupes por el nivel de dificultad al intentar mejorar la puntuación en el modo carrera, consigue la puntuación más alta que puedas y punto."
 )
 (loading_tip14
    "Coge la máxima puntuación obtenida en cada tema en todos los niveles y ponlas todas juntas. Esta es tu puntuación en el modo carrera."
