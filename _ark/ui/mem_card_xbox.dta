@@ -98,6 +98,7 @@
 }
 ;rewrite func to inject permadeath custom screen when loading a save
 {func goto_post_startup_load
+   {set $autosave TRUE}
    {ui goto_screen permadeath_options_screen}
 }
 {new GHScreen
