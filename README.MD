@@ -45,6 +45,7 @@ Accessibility and ways to keep it fresher, without obscuring the vision of the o
 * Purchaseable Red-Octane SG leftover in the vanilla files
 * Revised store prices to account for changes
 * Fast start (Xbox 360)
+* Fix "X" in streak meter on PS2 Emulator
 * Does not post to Xbox 360 Live leaderboards
 
 # Playing in Xenia
