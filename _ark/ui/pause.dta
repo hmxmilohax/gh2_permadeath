@@ -397,7 +397,10 @@
       {set $cal_from_pause FALSE}
       {gamecfg set mode practice}
       {gamecfg set_track 0 0}
-      {practice_sel_section_screen set career_mode TRUE}
+      {if_else {== career {gamecfg get mode}}
+         {practice_sel_section_screen set career_mode TRUE}
+         {practice_sel_section_screen set career_mode FALSE}
+      }
       {meta_loading_goto practice_sel_section_screen}
    )
    (SELECT_START_MSG
