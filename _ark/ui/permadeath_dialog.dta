@@ -34,6 +34,9 @@
       {set $scandlc FALSE}
       {set $last_index 0}
       {set $force_all_as_guitar FALSE}
+      #ifdef HX_EE
+      {load_calibration}
+      #endif
       {{dialog_extended find dl_title.lbl} set_text {localize perma_welcome}}
       ;btn1 perma
       ;btn2 random
@@ -246,30 +249,64 @@
       {campaign set_profile_name {sprint {num_to_alph {sprint $num_of_lives}}} 4}
       {campaign set_profile_name
          {sprint {num_to_alph {sprint $this_attempts}}}
-         5
+         #ifdef HX_XBOX 5 #else 6 #endif
       }
+      #ifdef HX_XBOX 
       {campaign set_profile_name
          {sprint {num_to_alph {sprint $highest_note_streak}}}
          6
       }
+      #else
+      {campaign set_profile_name
+         {sprint {num_to_alph {sprint $lag_audio_int}}}
+         3
+      }
+      {campaign set_profile_name
+         {sprint {num_to_alph {sprint $lag_video_int}}}
+         5
+      }
+      #endif
       {campaign set_profile_name
          {sprint {num_to_alph {sprint $highest_songs_completed}}}
          7
       }
-      {if_else {campaign is_empty_profile 5}
+      #ifdef HX_EE
+      {if_else {campaign is_empty_profile 3}
+         ;if empty, store our initial attempt count
+         {set $lag_audio_int 0}
+         ;load attempt count if exists
+         {set $lag_audio_int {int {alph_to_num {symbol {campaign profile_name 3}}}}}
+      }
+      {set $lag_audio {+ $lag_audio_int 0.0}}
+      #endif
+      ;this doesnt change between xbox and ps2
+      {if_else {campaign is_empty_profile #ifdef HX_XBOX 5 #else 6 #endif}
          ;if empty, store our initial attempt count
          {set $this_attempts 0}
          ;load attempt count if exists
          {set $this_attempts {int {alph_to_num {symbol {campaign profile_name 5}}}}}
       }
-      {if_else {campaign is_empty_profile 6}
+      ;this one does change between xbox and ps2, on ps2 it will store video cal
+      {if_else {campaign is_empty_profile #ifdef HX_XBOX 6 #else 5 #endif}
+         #ifdef HX_XBOX
          ;if empty, store our initial note count
          {set $highest_note_streak 0}
          ;load note count if exists
          {set $highest_note_streak
             {int {alph_to_num {symbol {campaign profile_name 6}}}}
          }
+         #else
+         ;if empty, store our initial note count
+         {set $lag_video_int 0}
+         ;load note count if exists
+         {set $lag_video_int
+            {int {alph_to_num {symbol {campaign profile_name 5}}}}
+         }
+         #endif
       }
+      #ifdef HX_EE
+      {set $lag_video {+ $lag_video_int 0.0}}
+      #endif
       {if_else {campaign is_empty_profile 7}
          ;if empty, store our initial fc count
          {set $highest_songs_completed 0}
@@ -424,20 +461,43 @@
    permadeath_attempts_screen
    DIALOG_SCREEN
    (enter
-      {if_else {campaign is_empty_profile 5}
+      #ifdef HX_EE
+      {if_else {campaign is_empty_profile 3}
+         ;if empty, store our initial attempt count
+         {set $lag_audio_int 0}
+         ;load attempt count if exists
+         {set $lag_audio_int {int {alph_to_num {symbol {campaign profile_name 3}}}}}
+      }
+      {set $lag_audio {+ $lag_audio_int 0.0}}
+      #endif
+      ;this doesnt change between xbox and ps2
+      {if_else {campaign is_empty_profile #ifdef HX_XBOX 5 #else 6 #endif}
          ;if empty, store our initial attempt count
          {set $this_attempts 0}
          ;load attempt count if exists
          {set $this_attempts {int {alph_to_num {symbol {campaign profile_name 5}}}}}
       }
-      {if_else {campaign is_empty_profile 6}
+      ;this one does change between xbox and ps2, on ps2 it will store video cal
+      {if_else {campaign is_empty_profile #ifdef HX_XBOX 6 #else 5 #endif}
+         #ifdef HX_XBOX
          ;if empty, store our initial note count
          {set $highest_note_streak 0}
          ;load note count if exists
          {set $highest_note_streak
             {int {alph_to_num {symbol {campaign profile_name 6}}}}
          }
+         #else
+         ;if empty, store our initial note count
+         {set $lag_video_int 0}
+         ;load note count if exists
+         {set $lag_video_int
+            {int {alph_to_num {symbol {campaign profile_name 5}}}}
+         }
+         #endif
       }
+      #ifdef HX_EE
+      {set $lag_video {+ $lag_video_int 0.0}}
+      #endif
       {if_else {campaign is_empty_profile 7}
          ;if empty, store our initial fc count
          {set $highest_songs_completed 0}
@@ -488,12 +548,23 @@
    (enter
       {campaign set_profile_name
          {sprint {num_to_alph {sprint $this_attempts}}}
-         5
+         #ifdef HX_XBOX 5 #else 6 #endif
       }
+      #ifdef HX_XBOX
       {campaign set_profile_name
          {sprint {num_to_alph {sprint $highest_note_streak}}}
          6
       }
+      #else
+      {campaign set_profile_name
+         {sprint {num_to_alph {sprint $lag_video_int}}}
+         5
+      }
+      {campaign set_profile_name
+         {sprint {num_to_alph {sprint $lag_audio_int}}}
+         3
+      }
+      #endif
       {campaign set_profile_name
          {sprint {num_to_alph {sprint $highest_songs_completed}}}
          7

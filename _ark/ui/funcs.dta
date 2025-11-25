@@ -47,7 +47,16 @@
       {delete calibration}
    }
    #else
-   kDataUnhandled
+   {set $lag_video_int {int $lag_video}}
+   {set $lag_audio_int {int $lag_audio}}
+   {campaign set_profile_name
+      {sprint {num_to_alph {sprint $lag_audio_int}}}
+      3
+   }
+   {campaign set_profile_name
+      {sprint {num_to_alph {sprint $lag_video_int}}}
+      5
+   }
    #endif
 }
 
@@ -62,7 +71,22 @@
       {delete $load}
    }
    #else
-   kDataUnhandled
+   {if_else {campaign is_empty_profile 3}
+      ;if empty, store our initial attempt count
+      {set $lag_audio_int 0}
+      ;load attempt count if exists
+      {set $lag_audio_int {int {alph_to_num {symbol {campaign profile_name 3}}}}}
+   }
+   {set $lag_audio {+ $lag_audio_int 0.0}}
+   {if_else {campaign is_empty_profile 5}
+      ;if empty, store our initial note count
+      {set $lag_video_int 0}
+      ;load note count if exists
+      {set $lag_video_int
+         {int {alph_to_num {symbol {campaign profile_name 5}}}}
+      }
+   }
+   {set $lag_video {+ $lag_video_int 0.0}}
    #endif
 }
 #ifdef HX_EE
