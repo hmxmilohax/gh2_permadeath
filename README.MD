@@ -51,6 +51,13 @@ Accessibility and ways to keep it fresher, without obscuring the vision of the o
 # Playing in Xenia
 Important note, to play GH2GYM or 80SGYM in Xenia, you must set "game_relative_writes", and "writable_code_segments" to "true" in the xenia config.toml. The game will not function without this setting, and is neccessary for some of the features added.
 
+# Installing via DIY releases
+GH2GYM and 80SGYM patch files are available in the Releases tab of this repo. But note, you MUST provide the base game in order for them to work. Head over and download the version you'd like.
+Extract your vanilla copy of your desired game from the original ISO or whatever format your Xbox version is
+Copy the files downloaded from the repo release, on top of the files for the vanilla game. Select yes to overwrite files.
+For example, use the "default.xex" from the repo download, and overwrite "main.hdr" in the "gen" folder, and copy "main_0.ark" in the "gen" folder as well.
+For PS2, you will need to create an ISO to play in PCSX2 or real hardware as normal.
+For Xbox, you will need a modified console to play, or use Xenia.
 
 <a id="permadeath_information"></a>
 # Permadeath information
