@@ -47,6 +47,9 @@ Accessibility and ways to keep it fresher, without obscuring the vision of the o
 * Fast start (Xbox 360)
 * Does not post to Xbox 360 Live leaderboards
 
+# Playing in Xenia
+Important note, to play GH2GYM or 80SGYM in Xenia, you must set "game_relative_writes", and "writable_code_segments" to "true" in the xenia config.toml. The game will not function without this setting, and is neccessary for some of the features added.
+
 
 <a id="permadeath_information"></a>
 # Permadeath information
