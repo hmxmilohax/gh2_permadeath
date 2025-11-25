@@ -189,4 +189,4 @@ jobs:
           allowUpdates: true
           artifacts: "*.zip"
           artifactErrorsFailBuild: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.RELEASE_TOKEN }}
