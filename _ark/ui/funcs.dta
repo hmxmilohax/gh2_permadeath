@@ -446,15 +446,25 @@
    ($song)
    {do
       ($ret
-         {if_else {|| $randomizer $permadeath}
+         {if_else $randomizer
             FALSE
             TRUE
          }
       )
-      {if {|| $randomizer $permadeath}
+      {if $randomizer
          {set $ret
             {find_elem $beat_songs_array {elem {find $syscfg mapped_songs $song} 1}}
          }
+      }
+      $ret
+   }
+}
+{func song_completed_non_randomizer
+   ($song)
+   {do
+      ($ret FALSE)
+      {set $ret
+         {find_elem $beat_songs_array {elem {find $syscfg mapped_songs $song} 1}}
       }
       $ret
    }
@@ -466,7 +476,7 @@
          {foreach $entry {find $syscfg mapped_songs}
             {if {!= $entry mapped_songs}
                {if $won_song
-                  {set $won_song {song_completed {elem $entry 0}}}
+                  {set $won_song {song_completed_non_randomizer {elem $entry 0}}}
                }
             }
          }
