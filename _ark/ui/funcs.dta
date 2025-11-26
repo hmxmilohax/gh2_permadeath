@@ -55,7 +55,7 @@
    }
    {campaign set_profile_name
       {sprint {num_to_alph {sprint $lag_video_int}}}
-      5
+      4
    }
    #endif
 }
@@ -78,12 +78,12 @@
       {set $lag_audio_int {int {alph_to_num {symbol {campaign profile_name 3}}}}}
    }
    {set $lag_audio {+ $lag_audio_int 0.0}}
-   {if_else {campaign is_empty_profile 5}
+   {if_else {campaign is_empty_profile 4}
       ;if empty, store our initial note count
       {set $lag_video_int 0}
       ;load note count if exists
       {set $lag_video_int
-         {int {alph_to_num {symbol {campaign profile_name 5}}}}
+         {int {alph_to_num {symbol {campaign profile_name 4}}}}
       }
    }
    {set $lag_video {+ $lag_video_int 0.0}}

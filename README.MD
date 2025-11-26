@@ -38,7 +38,7 @@ Accessibility and ways to keep it fresher, without obscuring the vision of the o
 * Pause to practice mode shortcut
 * Select to restart in practice mode
 * Faster menu scrolling speeds
-* Unlock all on its own campaign slot
+* Unlock all on its own campaign slot (on ps2, this slot's name is used to store audio calibration)
 * Campaign slots auto mapped for permadeath, randomizer, and vanilla runs respectively
 * Custom save name to not conflict with vanilla games for both 360 and ps2
 * Remember song list position between quickplay and practice
