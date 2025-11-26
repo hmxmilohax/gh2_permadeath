@@ -65,7 +65,8 @@
          )
          (restart.btn
             ; force restart if calibrated
-            {if_else $cal_from_pause
+            ; dont confirm restart if before intro is complete
+            {if_else {|| $cal_from_pause {! {game get intro_complete}}}
                {do
                   {$this restart}
                   {set $cal_from_pause FALSE}
