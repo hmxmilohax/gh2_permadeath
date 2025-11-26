@@ -36,6 +36,7 @@
       {set $force_all_as_guitar FALSE}
       #ifdef HX_EE
       {load_calibration}
+      {set_calibration}
       #endif
       {{dialog_extended find dl_title.lbl} set_text {localize perma_welcome}}
       ;btn1 perma
