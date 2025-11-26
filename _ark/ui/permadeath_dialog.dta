@@ -37,6 +37,7 @@
       #ifdef HX_EE
       {load_calibration}
       {set_calibration}
+      {set $num_of_lives 1}
       #endif
       {{dialog_extended find dl_title.lbl} set_text {localize perma_welcome}}
       ;btn1 perma
