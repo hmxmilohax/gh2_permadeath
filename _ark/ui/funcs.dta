@@ -72,16 +72,12 @@
    }
    #else
    {if_else {campaign is_empty_profile 3}
-      ;if empty, store our initial attempt count
-      {set $lag_audio_int 0}
-      ;load attempt count if exists
+      {set $lag_audio_int 500}
       {set $lag_audio_int {int {alph_to_num {symbol {campaign profile_name 3}}}}}
    }
    {set $lag_audio {+ {- $lag_audio_int 500} 0.0}}
    {if_else {campaign is_empty_profile 4}
-      ;if empty, store our initial note count
-      {set $lag_video_int 0}
-      ;load note count if exists
+      {set $lag_video_int 500}
       {set $lag_video_int
          {int {alph_to_num {symbol {campaign profile_name 4}}}}
       }
