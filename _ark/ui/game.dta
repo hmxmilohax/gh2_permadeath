@@ -415,7 +415,7 @@
          {if {meta is_any_button $button $player_num}
             {set $leaving {- {taskmgr ui_seconds} $enter_time}}
          }
-         {if {&& {== $button kPad_Start} {! {game get game_over}}}
+         {if {== $button kPad_Start}
             {$this pause_game}
          }
       }
