@@ -170,14 +170,17 @@
             {set $loaded_xenia TRUE}
             #endif
             {if_else $loaded_xenia ;check for game_relative_writes on xbox, skip on ps2
-               {if_else $permadeath
-                  {ui goto_screen permadeath_threshold_screen}
-                  {if_else #ifdef HX_XBOX FALSE #else $randomizer #endif ;cant save random setlist on ps2, skip on xbox
-                     {ui goto_screen not_permadeath_cant_save_screen}
-                     {ui goto_screen not_permadeath_save_screen}
+               {if_else $gym_unlock_all
+                  {ui goto_screen unlock_all_cant_save_screen}
+                  {if_else $permadeath
+                     {ui goto_screen permadeath_threshold_screen}
+                     {if_else #ifdef HX_XBOX FALSE #else $randomizer #endif ;cant save random setlist on ps2, skip on xbox
+                        {ui goto_screen not_permadeath_cant_save_screen}
+                        {ui goto_screen not_permadeath_save_screen}
+                     }
                   }
+                  {ui goto_screen permadeath_xenia_screen}
                }
-               {ui goto_screen permadeath_xenia_screen}
             }
          )
          kDataUnhandled
@@ -220,6 +223,28 @@
    )
 }
 {new GHScreen
+   unlock_all_cant_save_screen
+   DIALOG_SCREEN
+   (enter
+      {$this set_focus {dialog find dl_button1.btn}}
+      {{dialog find dl_title.lbl} set_text {localize perma_welcome}}
+      {{dialog find dl_message.lbl} set_text {localize cant_save_disabled}}
+      {$this disable {dialog find dl_button2.btn}}
+      {{dialog find dl_button1.btn} set_text {localize help_confirm}}
+      {{dialog find dl_button2.btn} set_showing FALSE}
+   )
+   (SELECT_START_MSG
+      {switch $component
+         (dl_button1.btn
+            {ui goto_screen not_permadeath_save_screen}
+         )
+         (dl_button2.btn
+            {ui goto_screen not_permadeath_save_screen}
+         )
+      }
+   )
+}
+{new GHScreen
    not_permadeath_save_screen
    DIALOG_SCREEN
    (enter
@@ -245,11 +270,11 @@
       #ifdef HX_EE
       {if_else {campaign is_empty_profile 3}
          ;if empty, store our initial attempt count
-         {set $lag_audio_int 0}
+         {set $lag_audio_int 500}
          ;load attempt count if exists
          {set $lag_audio_int {int {alph_to_num {symbol {campaign profile_name 3}}}}}
       }
-      {set $lag_audio {+ $lag_audio_int 0.0}}
+      {set $lag_audio {+ {- $lag_audio_int 500} 0.0}}
       #endif
       {if_else {campaign is_empty_profile 4}
          #ifdef HX_XBOX
@@ -259,7 +284,7 @@
          {set $num_of_lives {int {alph_to_num {symbol {campaign profile_name 4}}}}}
          #else
          ;if empty, store our initial note count
-         {set $lag_video_int 0}
+         {set $lag_video_int 500}
          ;load note count if exists
          {set $lag_video_int
             {int {alph_to_num {symbol {campaign profile_name 4}}}}
@@ -267,7 +292,7 @@
          #endif
       }
       #ifdef HX_EE
-      {set $lag_video {+ $lag_video_int 0.0}}
+      {set $lag_video {+ {- $lag_video_int 500} 0.0}}
       #endif
       ;this doesnt change between xbox and ps2
       {if_else {campaign is_empty_profile 5}
@@ -469,11 +494,11 @@
       #ifdef HX_EE
       {if_else {campaign is_empty_profile 3}
          ;if empty, store our initial attempt count
-         {set $lag_audio_int 0}
+         {set $lag_audio_int 500}
          ;load attempt count if exists
          {set $lag_audio_int {int {alph_to_num {symbol {campaign profile_name 3}}}}}
       }
-      {set $lag_audio {+ $lag_audio_int 0.0}}
+      {set $lag_audio {+ {- $lag_audio_int 500} 0.0}}
       #endif
       {if_else {campaign is_empty_profile 4}
          #ifdef HX_XBOX
@@ -483,7 +508,7 @@
          {set $num_of_lives {int {alph_to_num {symbol {campaign profile_name 4}}}}}
          #else
          ;if empty, store our initial note count
-         {set $lag_video_int 0}
+         {set $lag_video_int 500}
          ;load note count if exists
          {set $lag_video_int
             {int {alph_to_num {symbol {campaign profile_name 4}}}}
@@ -491,7 +516,7 @@
          #endif
       }
       #ifdef HX_EE
-      {set $lag_video {+ $lag_video_int 0.0}}
+      {set $lag_video {+ {- $lag_video_int 500} 0.0}}
       #endif
       ;this doesnt change between xbox and ps2
       {if_else {campaign is_empty_profile 5}

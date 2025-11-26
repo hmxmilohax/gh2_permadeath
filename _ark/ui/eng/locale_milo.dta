@@ -28,6 +28,13 @@
    #endif
 )
 (cant_save "Please note, we cannot restore the randomized setlist after restarting the game.\nYour randomizer save will be deleted when the console is powered off.")
+(cant_save_disabled
+   #ifdef GAME_GH2
+   "Saving is disabled while in unlock all.\n\nHead to Options>GH2GYM Settings to restart GH2GYM and re-enable saving."
+   #else
+   "Saving is disabled while in unlock all.\n\nHead to Options>80SGYM Settings to restart 80SGYM and re-enable saving."
+   #endif
+)
 (permadeath_welcome
    {if_else $strum_limit_disabled
       "Welcome (back)\nAttempts: %i\nTop Streak: %i\nTop FC streak: %i songs\nStrum Limit is disabled."
