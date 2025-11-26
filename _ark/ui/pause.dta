@@ -44,10 +44,10 @@
    (restart
       {synth stop_all_sfx}
       {synth play_sequence button_play}
-      {if_else {game get intro_complete}
-         {game_restart_fast}
-         {game_restart}
-      }
+      ;{if_else {game get intro_complete}
+         {game_restart_fast} ;always game restart fast to skip repeating intro sequence
+      ;   {game_restart}
+      ;}
    )
 )
 #define PAUSE_SELECT_START_HANDLER (
