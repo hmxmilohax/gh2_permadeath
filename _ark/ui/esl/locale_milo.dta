@@ -30,9 +30,9 @@
 (cant_save "Ten en cuenta que no podemos restaurar tu repertorio de Randomizer al reiniciar el juego.\nTu partida aleatoria será borrada al apagar la consola.")
 (cant_save_disabled
    #ifdef GAME_GH2
-   "Saving is disabled while in unlock all.\n\nHead to Options>GH2GYM Settings to restart GH2GYM and re-enable saving."
+   "El guardado se ha deshabilitado al usar Desbloquear Todo.\n\nVe a Opciones > Ajustes de GH2GYM para reiniciar GH2GYM y habilitar el guardado."
    #else
-   "Saving is disabled while in unlock all.\n\nHead to Options>80SGYM Settings to restart 80SGYM and re-enable saving."
+   "El guardado se ha deshabilitado al usar Desbloquear Todo.\n\nVe a Opciones > Ajustes de 80SGYM para reiniciar 80SGYM y habilitar el guardado."
    #endif
 )
 (permadeath_welcome
