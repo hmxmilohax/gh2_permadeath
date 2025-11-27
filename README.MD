@@ -53,7 +53,7 @@ Accessibility and ways to keep it fresher, without obscuring the vision of the o
 * Does not post to Xbox 360 Live leaderboards
 
 # Playing in Xenia
-Important note, to play GH2GYM or 80SGYM in Xenia, you must set "game_relative_writes", and "writable_code_segments" to "true" in the xenia config.toml. The game will not function without this setting, and is neccessary for some of the features added.
+Important note, to play GH2GYM or 80SGYM in Xenia, you must set "allow_game_relative_writes", and "writable_code_segments" to "true" in the xenia config.toml. The game will not function without this setting, and is neccessary for some of the features added.
 
 # Installing via DIY releases
 GH2GYM and 80SGYM patch files are available in the Releases tab of this repo. But note, you MUST provide the base game in order for them to work. Head over and download the version you'd like.
