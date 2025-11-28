@@ -629,7 +629,7 @@
       {{dialog find dl_title.lbl} set_text {localize gh2_permadeath}}
       ;print loss
       ;| || || |_
-      {if_else {== $lives_lost {- $num_of_lives 1}}
+      {if_else {|| {== $lives_lost {- $num_of_lives 1}} {<= {- $num_of_lives $lives_lost} 0}}
          {{dialog find dl_message.lbl} set_localized_text
             {localize permadeath_lost_final}
          }
@@ -638,7 +638,7 @@
          }
       }
       ;if we completely ran out of lives
-      {if {== $lives_lost $num_of_lives}
+      {if {|| {== $lives_lost $num_of_lives} {<= {- $num_of_lives $lives_lost} 0}}
          ;reenable saving to store our stats
          {set $autosave TRUE}
          {set $disable_save FALSE}
@@ -661,7 +661,7 @@
       }
    )
    (SELECT_START_MSG
-      {if_else {== $lives_lost $num_of_lives}
+      {if_else {|| {== $lives_lost $num_of_lives} {<= {- $num_of_lives $lives_lost} 0}}
          ;save stats to file and restart flow
          {ui goto_screen permadeath_options_screen}
          ;we arent dead yet

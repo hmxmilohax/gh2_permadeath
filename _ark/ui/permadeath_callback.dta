@@ -4,6 +4,7 @@
    {world_panel set_paused TRUE}
 )
 #define LOST_THE_GAME (
+   {set $lost_the_game TRUE}
    ;lost a life
    {++ $lives_lost}
    ;lives remain, go back to song_select/main menu
@@ -14,7 +15,7 @@
       {meta_loading_goto permadeath_lost_screen}
    }
    ;no lives remain
-   {if {== $num_of_lives $lives_lost}
+   {if {|| {== $num_of_lives $lives_lost} {<= {- $num_of_lives $lives_lost} 0}}
       ;delete permadeath save file, besides our tracking ones
       {if {! {campaign is_empty_profile 0}}
          {campaign delete_slot 0}
@@ -36,14 +37,14 @@
    )
    (gem_miss_callback
       {if $passed_first_note
-         {if {== $accuracy_threshold_elem 0}
+         {if {&& {! $lost_the_game} {== $accuracy_threshold_elem 0}}
             LOST_THE_GAME
          }
       }
    )
    (gem_pass_callback
       {$this first_note}
-      {if {== $accuracy_threshold_elem 0}
+      {if {&& {! $lost_the_game} {== $accuracy_threshold_elem 0}}
          LOST_THE_GAME
       }
    )

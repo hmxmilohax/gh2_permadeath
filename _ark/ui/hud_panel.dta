@@ -22,6 +22,7 @@
       #ifdef HX_EE
       {fix_streak_meter_emu}
       #endif
+      {set $lost_the_game FALSE}
       {if $permadeath
          {set $temp_note_streak {int 0}}
          ;permadeath add our custom callback for miss tracking
