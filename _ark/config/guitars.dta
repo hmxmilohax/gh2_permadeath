@@ -359,7 +359,7 @@
    )
 )
 (scythe
-   (type #ifdef _SHIP guitar #else grim #endif)
+   (type grim)
    (skins
       (scythe
          (outfit scythe)
