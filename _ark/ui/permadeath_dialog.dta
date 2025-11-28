@@ -34,6 +34,7 @@
       {set $scandlc FALSE}
       {set $last_index 0}
       {set $force_all_as_guitar FALSE}
+      {set $return_flow FALSE}
       #ifdef HX_EE
       {load_calibration}
       {set_calibration}
@@ -607,7 +608,7 @@
          7
       }
       {if $return_flow
-         {autosave_goto permadeath_threshold_screen}
+         {autosave_goto permadeath_options_screen}
       }
       {if {! $return_flow}
          ;go to the game (you lost)
@@ -663,7 +664,7 @@
    (SELECT_START_MSG
       {if_else {|| {== $lives_lost $num_of_lives} {<= {- $num_of_lives $lives_lost} 0}}
          ;save stats to file and restart flow
-         {ui goto_screen permadeath_options_screen}
+         {ui goto_screen permadeath_save_screen}
          ;we arent dead yet
          {switch $component
             (dl_button1.btn {ui goto_screen sel_song_screen})
