@@ -17,7 +17,7 @@
    (chet_atkins (price 800))
    (fish_reward (price 1000))
    #ifdef _SHIP
-   (scythe (price #ifdef GAME_GH2 3000 #else 4000 #endif))
+   ;(scythe (price #ifdef GAME_GH2 3000 #else 4000 #endif))
    #endif
    (usa_reward (price #ifdef HX_XBOX #ifdef GAME_GH2 1500 #else 2000 #endif #else 2000 #endif))
    (coffin_reward (price #ifdef HX_XBOX #ifdef GAME_GH2 1000 #else 2000 #endif #else 2000 #endif))
