@@ -27,8 +27,8 @@
          {if {!= $accuracy_threshold_elem 0}
             {if
                {&&
-                  {<= $percent_hit_frac1 $accuracy_threshold}
-                  {<= $percent_hit_frac2 $accuracy_threshold}
+                  {< $percent_hit_frac1 $accuracy_threshold}
+                  {< $percent_hit_frac2 $accuracy_threshold}
                }
                {set $good_to_go FALSE}
                {++ $lives_lost}
