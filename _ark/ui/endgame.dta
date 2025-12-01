@@ -34,7 +34,11 @@
                {++ $lives_lost}
             }
             {if {!= $accuracy_threshold_elem 0}
-               {set $temp_lowest_acc $percent_hit_frac1}
+               ;set temp lowest acc to lowest acc player (crudely)
+               {if_else {< $percent_hit_frac2 $percent_hit_frac1}
+                  {set $temp_lowest_acc $percent_hit_frac2}
+                  {set $temp_lowest_acc $percent_hit_frac1}
+               }
                ;submit highest note streak
                {if {< $temp_lowest_acc $lowest_acc}
                   {set $lowest_acc $temp_lowest_acc}
@@ -1424,6 +1428,10 @@
       {{dialog find dl_title.lbl} set_text {localize gh2_permadeath}}
       ;print loss
       ;| || || |_
+      ;we only report 1 number, so if player 2 did worse, report that number instead
+      {if {< $percent_hit_frac2 $percent_hit_frac1}
+         {set $percent_hit_frac1 $percent_hit_frac2}
+      }
       {if_else {== $lives_lost {- $num_of_lives 1}}
          {{dialog find dl_message.lbl} set_localized_text
             {localize permadeath_lost_final_perc}
