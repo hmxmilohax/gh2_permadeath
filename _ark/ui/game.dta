@@ -210,6 +210,7 @@
                {if {options get_lefty 0}
                   {achievements submit lefty}
                }
+               #ifdef GAME_GH2
                {do
                   ($jordan FALSE)
                   {foreach $entry {find $syscfg mapped_songs}
@@ -229,6 +230,7 @@
                      {achievements submit jordan}
                   }
                }
+               #endif
             }
             {if {== multi_coop {gamecfg get mode}}
                {if {== {band percent_hit} 100}

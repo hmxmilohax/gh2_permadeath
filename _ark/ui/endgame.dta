@@ -95,6 +95,7 @@
       }
       #ifdef HX_XBOX
       {if {&& $good_to_go {! {gamecfg multiplayer}}}
+         #ifdef GAME_GH2
          {if
             {&&
                {song_completed_non_randomizer trogdor}
@@ -102,6 +103,7 @@
             }
             {achievements submit troghorse}
          }
+         #endif
          {if {campaign store_songs_passed}
             {achievements submit beat_unlocks}
          }
