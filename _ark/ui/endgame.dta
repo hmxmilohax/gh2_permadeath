@@ -674,91 +674,6 @@
       endgame_encore_letter6
    )
 )
-#define ENDGAME_ENCORE_GH2 (
-{new GHPanel
-   endgame_encore_panel
-   (file endgame_encore.milo)
-   (focus yes.btn)
-   (cash_award 0)
-   (is_final_song 0)
-   (enter
-      {freebird_moves.tnm set_frame 0.0}
-      {freebird1.grp set_showing FALSE}
-      {freebird2.grp set_showing FALSE}
-      {freebird3.grp set_showing FALSE}
-      {$this set_focus yes.btn}
-      {set [cash_award] {cashaward_screen get new_cash}}
-      {score.lbl set_localized_text
-         {sprintf {localize endgame_encore_score} {player0 score}}
-      }
-      {review.lbl set_localized_text
-         {sprintf {localize endgame_encore_review} {player0 num_stars}}
-      }
-      {money.lbl set_localized_text
-         {if_else [cash_award]
-            {sprintf {localize endgame_encore_money} [cash_award]}
-            ""
-         }
-      }
-      {letter2.lbl set_text
-         {if_else [is_final_song]
-            endgame_encore_freebird1
-            {random_elem ENDGAME_ENCORE_LETTERS}
-         }
-      }
-   )
-   (SELECT_START_MSG
-      {synth play_sequence button_select}
-      {switch $component
-         (yes.btn
-            {if_else [is_final_song]
-               {do
-                  {freebird_moves.tnm animate
-                     (range 0.0 1.0)
-                     (period 0.15)
-                     (units k30_fps_ui)
-                  }
-                  {freebird1.grp set_showing TRUE}
-                  {$this set_focus yes_freebird1.btn}
-               }
-               {do
-                  START_ENCORE
-               }
-            }
-         )
-         (
-            (no.btn no_freebird1.btn no_freebird2.btn no_freebird3.btn)
-            #ifdef HX_XBOX
-	    {achievements submit encoreno}
-	    #endif
-            {world play_meta_sfx encore_no}
-            {encore_stream stop}
-            {ui goto_screen endgame_screen}
-         )
-         (yes_freebird1.btn
-            {freebird_moves.tnm animate
-               (range 1.0 2.0)
-               (period 0.15)
-               (units k30_fps_ui)
-            }
-            {freebird2.grp set_showing TRUE}
-            {$this set_focus yes_freebird2.btn}
-         )
-         (yes_freebird2.btn
-            {freebird_moves.tnm animate
-               (range 2.0 3.0)
-               (period 0.15)
-               (units k30_fps_ui)
-            }
-            {freebird3.grp set_showing TRUE}
-            {$this set_focus yes_freebird3.btn}
-         )
-         (yes_freebird3.btn START_ENCORE)
-      }
-      kDataUnhandled
-   )
-})
-#define ENDGAME_ENCORE_80S (
 {new GHPanel
    endgame_encore_panel
    (file endgame_encore.milo)
@@ -838,16 +753,7 @@
       }
       kDataUnhandled
    )
-})
-#ifdef HX_XBOX
-#ifdef GAME_GH2
-ENDGAME_ENCORE_GH2
-#else
-ENDGAME_ENCORE_80S
-#endif
-#else
-ENDGAME_ENCORE_80S
-#endif
+}
 {new GHScreen
    endgame_encore_screen
    (panels GAME_PANELS endgame_encore_panel helpbar)
