@@ -226,6 +226,7 @@
       }
    )
    (game_lost
+      {set $game_lost TRUE}
       {track_panel set_showing FALSE}
       {game set_realtime TRUE}
       {$this slow_music}
@@ -262,7 +263,8 @@
             {if_else $permadeath
                {do
                   {++ $lives_lost}
-                  {ui goto_screen permadeath_lost_in_game_screen}
+                  {set $return_flow TRUE}
+                  {meta_loading_goto permadeath_lost_screen}
                }
                {ui goto_screen {gamecfg get lose_screen}}
             }
@@ -422,7 +424,17 @@
             {set $leaving {- {taskmgr ui_seconds} $enter_time}}
          }
          {if {== $button kPad_Start}
-            {$this pause_game}
+            {if
+               {||
+                  {! {game get game_over}}
+                  {&&
+                     {game get game_over}
+                     $game_lost
+                     {! $permadeath}
+                  }
+               }
+               {$this pause_game}
+            }
          }
       }
    )

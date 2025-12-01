@@ -22,7 +22,8 @@
       #ifdef HX_EE
       {fix_streak_meter_emu}
       #endif
-      {set $lost_the_game FALSE}
+      {set $lost_the_game FALSE} ;this one is to block permadeath loss count to one call
+      {set $game_lost FALSE} ;this one is just to allow pausing and not for permadeath
       {if $permadeath
          {set $temp_note_streak {int 0}}
          ;permadeath add our custom callback for miss tracking
