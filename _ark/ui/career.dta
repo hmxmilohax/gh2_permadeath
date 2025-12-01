@@ -441,7 +441,7 @@
       }
       {do
          ($sel_char {sel_character_panel get char_focus})
-         {if_else {> {character_provider num_outfits $sel_char} 1}
+         {if_else {> {character_provider num_outfits $sel_char} #ifdef HX_XBOX #ifdef GAME_GH2 1 #else 2 #endif #else 2 #endif}
             {sel_character_panel choose_skins}
             {do
                {game set_character {sel_character_panel get char_outfit} TRUE}
