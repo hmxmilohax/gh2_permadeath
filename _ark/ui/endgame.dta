@@ -705,6 +705,9 @@
             {random_elem ENDGAME_ENCORE_LETTERS}
          }
       }
+      {finalsong1.lbl set_text {localize finalsong_confirm1}}
+      {finalsong2.lbl set_text {localize finalsong_confirm2}}
+      {finalsong3.lbl set_text {localize finalsong_confirm3}}
    )
    (SELECT_START_MSG
       {synth play_sequence button_select}
