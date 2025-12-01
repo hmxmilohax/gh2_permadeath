@@ -210,12 +210,24 @@
                {if {options get_lefty 0}
                   {achievements submit lefty}
                }
-               {if
-                  {&&
-                     {== {gamecfg get_difficulty 0} kDifficultyExpert}
-                     {== {gamecfg get_song} jordan}
+               {do
+                  ($jordan FALSE)
+                  {foreach $entry {find $syscfg mapped_songs}
+                     {if {!= $entry mapped_songs}
+                        {if {== {elem $entry 1} {gamecfg get_song}} ;find outer linked song (current song)
+                           {if {== {elem $entry 0} jordan} ;check if it is linked to tonightimgonna via randomizer
+                              {set $jordan TRUE}
+                           }
+                        }
+                     }
                   }
-                  {achievements submit jordan}
+                  {if
+                     {&&
+                        {== {gamecfg get_difficulty 0} kDifficultyExpert}
+                        $jordan
+                     }
+                     {achievements submit jordan}
+                  }
                }
             }
             {if {== multi_coop {gamecfg get mode}}

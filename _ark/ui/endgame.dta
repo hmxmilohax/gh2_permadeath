@@ -97,8 +97,8 @@
       {if {&& $good_to_go {! {gamecfg multiplayer}}}
          {if
             {&&
-               {campaign is_song_passed trogdor}
-               {campaign is_song_passed thunderhorse}
+               {song_completed_non_randomizer trogdor}
+               {song_completed_non_randomizer thunderhorse}
             }
             {achievements submit troghorse}
          }
