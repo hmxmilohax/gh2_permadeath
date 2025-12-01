@@ -758,7 +758,7 @@
       kDataUnhandled
    )
 })
-#define ENDGAME_ENCORE_80S_PS2 (
+#define ENDGAME_ENCORE_80S (
 {new GHPanel
    endgame_encore_panel
    (file endgame_encore.milo)
@@ -840,9 +840,13 @@
    )
 })
 #ifdef HX_XBOX
+#ifdef GAME_GH2
 ENDGAME_ENCORE_GH2
 #else
-ENDGAME_ENCORE_80S_PS2
+ENDGAME_ENCORE_80S
+#endif
+#else
+ENDGAME_ENCORE_80S
 #endif
 {new GHScreen
    endgame_encore_screen
