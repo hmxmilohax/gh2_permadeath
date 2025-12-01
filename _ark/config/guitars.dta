@@ -23,7 +23,7 @@
    (type guitar)
    (skins
       (sg_cherry
-         (outfit {if_else {== {game get_track_sym 0} bass} bass_musicman_lava guitar_sg})
+         (outfit {if_else {== {game get_track_sym 0} bass} bass_music_lava guitar_sg})
          (mat {if_else {== {game get_track_sym 0} bass} bass_music_lava.mat guitar_sg_cherry.mat})
       )
       (sg_white
