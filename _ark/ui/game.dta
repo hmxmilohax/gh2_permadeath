@@ -73,12 +73,24 @@
       }
       {print "encore song is " [encore_song] "\n"}
       #ifdef GAME_GH2
-      {if
-         {&&
-            {== {game get_venue} battle}
-            {&& {== {game want_encore_fx} TRUE} {== {gamecfg get_song} tonightimgonna}}
+      {do
+         ($tonight FALSE)
+         {foreach $entry {find $syscfg mapped_songs}
+            {if {!= $entry mapped_songs}
+               {if {== {elem $entry 1} {gamecfg get_song}} ;find outer linked song (current song)
+                  {if {== {elem $entry 0} tonightimgonna} ;check if it is linked to tonightimgonna via randomizer
+                     {set $tonight TRUE}
+                  }
+               }
+            }
          }
-         {{{world_panel loaded_dir} find drummer} show_drummer}
+         {if
+            ;{&&
+            ;   {== {game get_venue} battle} ;explode drummer on any venue for tonightimgonna
+               {&& {== {game want_encore_fx} TRUE} $tonight}
+            ;}
+            {{{world_panel loaded_dir} find drummer} show_drummer}
+         }
       }
       #endif
    )
@@ -160,12 +172,22 @@
       ($encore)
       {if_else {gamecfg get game_over_sequence}
          {do
+            ($tonight FALSE)
+            {foreach $entry {find $syscfg mapped_songs}
+               {if {!= $entry mapped_songs}
+                  {if {== {elem $entry 1} {gamecfg get_song}} ;find outer linked song (current song)
+                     {if {== {elem $entry 0} tonightimgonna} ;check if it is linked to tonightimgonna via randomizer
+                        {set $tonight TRUE}
+                     }
+                  }
+               }
+            }
             #ifdef GAME_GH2
             {if
-               {&&
-                  {== {game get_venue} battle}
-                  {&& {== {game want_encore_fx} TRUE} {== {gamecfg get_song} tonightimgonna}}
-               }
+               ;{&&
+               ;   {== {game get_venue} battle} ;explode drummer on any venue for tonightimgonna
+                  {&& {== {game want_encore_fx} TRUE} $tonight}
+               ;}
                {do
                   {script_task
                      (delay DRUMMER_EXPLODE_DELAY)
