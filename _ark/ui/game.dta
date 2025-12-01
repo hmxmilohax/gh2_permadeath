@@ -259,7 +259,13 @@
             #ifdef HX_XBOX
             {world_panel set_paused TRUE}
             #endif
-            {ui goto_screen {gamecfg get lose_screen}}
+            {if_else $permadeath
+               {do
+                  {++ $lives_lost}
+                  {ui goto_screen permadeath_lost_in_game_screen}
+               }
+               {ui goto_screen {gamecfg get lose_screen}}
+            }
          }
       }
       kDataUnhandled
