@@ -129,7 +129,7 @@
 (guitar_red_octane_desc
    "Wait a second, this was really in the game this whole time? Yes it was."
 )
-(guitar_red_octane
+(guitar_red_octane_shop_desc
    "Wait a second, this was really in the game this whole time? Yes it was."
 )
 (dead "Dead!")

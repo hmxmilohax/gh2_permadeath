@@ -129,7 +129,7 @@
 (guitar_red_octane_desc
    "Espera, ¿esto siempre estuvo en los archivos del juego? Sí, lo estuvo."
 )
-(guitar_red_octane
+(guitar_red_octane_shop_desc
    "Espera, ¿esto siempre estuvo en los archivos del juego? Sí, lo estuvo."
 )
 (dead "Dead!")
