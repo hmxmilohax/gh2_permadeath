@@ -1434,7 +1434,7 @@
       }
       {if_else {== $lives_lost {- $num_of_lives 1}}
          {{dialog find dl_message.lbl} set_localized_text
-            {localize permadeath_lost_final_perc}
+            {localize permadeath_lost_final_perc $percent_hit_frac1 $accuracy_threshold}
          }
          {{dialog find dl_message.lbl} set_localized_text
             {sprintf {localize permadeath_lost_perc} $percent_hit_frac1 $accuracy_threshold {- $num_of_lives $lives_lost}}
