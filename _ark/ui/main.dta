@@ -11,6 +11,11 @@
    (enter
       {set $main_entered TRUE}
       {set $leaderboards_mode FALSE}
+      #ifdef HX_XBOX
+      #ifdef GAME_GH2
+      {$this disable main_leaderboards.btn}
+      #endif
+      #endif
       {practice_sel_section_screen set career_mode FALSE}
       {$this reset_player_settings}
       {if {! [already_entered]}
