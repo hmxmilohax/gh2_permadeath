@@ -254,12 +254,17 @@ for f in filter(ark_file_filter, Path("_ark").rglob("*")):
             ark_files.append(str(encryption_output))
         case _:
             index = f.parts.index("_ark")
-            rel_parts = list(f.parts[index + 1 :])
+            rel_parts = list(f.parts[index + 1:])
 
-            # GH80s: remap /_ark/ui/image_80s/... -> obj/.../ark/ui/image/...
-            if args.game == "gh80s":
-                if len(rel_parts) >= 2 and rel_parts[0] == "ui" and rel_parts[1] == "image_80s":
-                    rel_parts[1] = "image"
+            # GH80s (Xbox): remap /_ark/ui/image/ng_80s/... -> obj/.../ark/ui/image/ng/...
+            if args.game == "gh80s" and args.platform == "xbox":
+                if (
+                    len(rel_parts) >= 3
+                    and rel_parts[0] == "ui"
+                    and rel_parts[1] == "image"
+                    and rel_parts[2] == "ng_80s"
+                ):
+                    rel_parts[2] = "ng"
 
             out_path = Path("obj", args.game, args.platform, "ark").joinpath(*rel_parts)
             ninja.build(str(out_path), "copy", str(f))
