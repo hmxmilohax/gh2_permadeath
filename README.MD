@@ -36,7 +36,7 @@ Accessibility and ways to keep it fresher, without obscuring the vision of the o
 * Default to Expert in select difficulty screens
 * Confirm to restart/quit for ps2 from xbox
 * Restarting before the highway extends, will always fast restart (similar to gh3)
-* Allow pausing during fail state (similar to gh3)
+* Allow pausing during fail state (similar to gh3) (not during permadeath)
 * Pause to practice mode shortcut
 * Select to restart in practice mode
 * Faster menu scrolling speeds
