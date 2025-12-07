@@ -87,6 +87,11 @@ ark_dir = Path("obj", args.game, args.platform, "ark")
 stale_image_dir = ark_dir / "ui" / "image"
 shutil.rmtree(stale_image_dir, ignore_errors=True)
 
+def is_macos_junk(path: Path) -> bool:
+    name = path.name
+    # .DS_Store and AppleDouble resource fork files like ._whatever
+    return name == ".DS_Store" or name.startswith("._")
+
 match sys.platform:
     case "win32":
         ninja.variable("silence", ">nul")
@@ -176,7 +181,10 @@ ninja.build("_always", "phony")
 build_files = []
 
 # copy whatever arbitrary files you need to output
-for f in filter(lambda x: x.is_file(), Path("dependencies", "platform_files", args.game, args.platform).rglob("*")):
+for f in filter(
+    lambda x: x.is_file() and not is_macos_junk(x),
+    Path("dependencies", "platform_files", args.game, args.platform).rglob("*")
+):
     index = f.parts.index(args.platform)
     out_path = Path("out", args.game, args.platform).joinpath(*f.parts[index + 1 :])
     ninja.build(str(out_path), "copy", str(f))
@@ -185,6 +193,8 @@ for f in filter(lambda x: x.is_file(), Path("dependencies", "platform_files", ar
 def ark_file_filter(file: Path):
     if file.is_dir():
         return False
+    if is_macos_junk(file):
+        return False
     if file.suffix.endswith("_xbox") and args.platform != "xbox":
         return False
     if file.suffix.endswith("mogg") and args.platform == "ps2":
@@ -192,6 +202,7 @@ def ark_file_filter(file: Path):
     if any(file.suffix.endswith(suffix) for suffix in ["_ps2", "vgs"]) and args.platform != "ps2":
         return False
     return True
+
 
 # build ark files
 ark_files = []
@@ -240,6 +251,25 @@ for f in filter(ark_file_filter, Path("_ark").rglob("*")):
                     dst_file.writelines(lines)
 
                 src_dta = patched_dta
+
+            iso_dta = Path(
+                "obj",
+                args.game,
+                args.platform,
+                "iso_dta",
+                *f.parent.parts[1:],
+                f.name,
+            )
+            iso_dta.parent.mkdir(parents=True, exist_ok=True)
+
+            with open(src_dta, "r", encoding="iso-8859-1") as src_file:
+                text = src_file.read()
+
+            with open(iso_dta, "w", encoding="iso-8859-1") as dst_file:
+                dst_file.write(text)
+
+            # Use the re-encoded file for dtacheck/dtab
+            src_dta = iso_dta
 
             ninja.build(str(stamp), "dtacheck", str(src_dta))
             ninja.build(
