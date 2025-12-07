@@ -52,7 +52,7 @@ Accessibility and ways to keep it fresher, without obscuring the vision of the o
 * Revised store prices to account for changes
 * Fast start (skip startup publisher screens)
 * Fix "X" in streak meter on PS2 Emulator
-* Includes officially fixed Wrathchild chart originally only included in the GH80s PAL release
+* Includes the officially fixed Wrathchild chart originally only included in the GH80s PAL release
 * Does not post to Xbox 360 Live leaderboards
 
 # Playing in Xenia
