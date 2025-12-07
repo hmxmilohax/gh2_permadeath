@@ -24,11 +24,7 @@
    )
    (keyboard (disable FALSE))
    (multitap (disable TRUE))
-   #ifdef HX_XBOX
-   (language)
-   #else
    (language (default eng))
-   #endif
    (fp_exceptions TRUE)
    (main_dir 19997 150000)
    (dir_sort
@@ -48,6 +44,9 @@
       CharClipSetCallback
       CharClipSamples
    )
+   #ifdef HX_XBOX
+   (xbox_map_file "default_%s.map")
+   #endif
    (ng FALSE)
 )
 (objects
@@ -89,6 +88,9 @@
    (mute FALSE)
    (stream_buf_size 1.2)
    (stream_readahead 0)
+   #ifdef HX_XBOX
+   (use_xma TRUE)
+   #endif
    (oggvorbis
       #ifdef HX_XBOX
          #ifdef _DEBUG
@@ -261,11 +263,18 @@
    (height 480)
    #endif
    (bpp 16)
+   #ifdef HX_XBOX
+   (gamma 0.85)
+   #endif
    (sync TRUE)
    (guard_band 0 0)
    (title "Hmx App")
+   #ifdef HX_XBOX
+   (maximize FALSE)
+   #else
    (show_timers FALSE)
    (timer_maxms 50)
+   #endif
    (clear_color 0.0 0.0 0.0)
    #ifdef HX_XBOX
    (overlays
@@ -367,7 +376,7 @@
    )
    (env (ambient 1 1 1))
    (transition_time 0.5)
-   (min_splash_time 1.0)
+   (min_splash_time 0.0)
    #ifdef HX_XBOX
    (cheat_init
       #include cheat_init.dta
