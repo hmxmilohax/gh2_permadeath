@@ -481,8 +481,8 @@
 (alterna "Judy Nails")
 (alterna2 "Judy Nails")
 (classic "Clive Winston")
-(deathmetal "Lars ÃœmlaÃ¼t")
-(deathmetal2 "Lars ÃœmlaÃ¼t")
+(deathmetal "Lars Ümlaüt")
+(deathmetal2 "Lars Ümlaüt")
 (funk1 "Xavier Stone")
 (glam "Izzy Sparks")
 (glam2 "Izzy Sparks")
@@ -861,7 +861,7 @@
 (guitarname_desc "guitarname description")
 (scythe "Scythe")
 (scythe_desc
-   "On second thought, you probably should fear the reaper. Equally suited for Ã¼ber-fast shredding or deadly combat, this literal axe is a dangerous mother."
+   "On second thought, you probably should fear the reaper. Equally suited for über-fast shredding or deadly combat, this literal axe is a dangerous mother."
 )
 (bass_musicman "Black MusicMan StingRay Bass")
 (bass_musicman_lava "Lava Pearl MusicMan StingRay Bass")

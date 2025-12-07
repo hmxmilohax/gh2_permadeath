@@ -134,7 +134,7 @@
 )
 (dead "Dead!")
 (dead_shop_desc
-   "To quote Patrick Kolan's review of My Chemical Romance's Sydney Luna Park gig, \qpigeonhole… based… attire\q. Hmm, how about: \qThey're punk with a black taint. It's an image thing\q."
+   "To quote Patrick Kolan's review of My Chemical Romance's Sydney Luna Park gig, \qpigeonhole... based... attire\q. Hmm, how about: \qThey're punk with a black taint. It's an image thing\q."
 )
 (hush "Hush")
 (hush_shop_desc
@@ -158,7 +158,7 @@
 )
 (rockandroll "Rock and Roll Hoochie Koo")
 (rockandroll_shop_desc
-   "Derringer’s solo album, All American Boy was released in ’73 with the now already popular \qRock and Roll, Hoochie Koo\q this time as a ‘hit’ single."
+   "Derringer's solo album, All American Boy was released in '73 with the now already popular \qRock and Roll, Hoochie Koo\q this time as a 'hit' single."
 )
 (trooper "The Trooper")
 (trooper_shop_desc
