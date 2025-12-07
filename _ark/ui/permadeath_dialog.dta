@@ -180,8 +180,8 @@
                         {ui goto_screen not_permadeath_save_screen}
                      }
                   }
-                  {ui goto_screen permadeath_xenia_screen}
                }
+               {ui goto_screen permadeath_xenia_screen}
             }
          )
          kDataUnhandled
@@ -380,7 +380,7 @@
    )
    (update_threshold_counter
       {set $accuracy_threshold {elem $accuracy_threshold_arr $accuracy_threshold_elem}}
-      {if_else {== {sprint $accuracy_threshold} full_combo}
+      {if_else {== $accuracy_threshold_elem 0}
          {{dialog find dl_message.lbl} set_localized_text {sprintf {localize accuracy_threshold_fc} {localize $accuracy_threshold}}}
          {if_else
             {||
@@ -815,19 +815,17 @@
    )
    (setup_text
       {do
-         ($float
-            {||
-               {== $accuracy_threshold 99.9} {== $accuracy_threshold 99.8}
-               {== $accuracy_threshold 99.7} {== $accuracy_threshold 99.6}
-               {== $accuracy_threshold 99.5} {== $accuracy_threshold 99.4}
-               {== $accuracy_threshold 99.3} {== $accuracy_threshold 99.2}
-               {== $accuracy_threshold 99.1}
-            }
-         )
          ($line1
             {if_else {== $accuracy_threshold_elem 0}
                {sprintf {localize overlay_threshold_fc} {localize $accuracy_threshold}}
-               {if_else $float
+               {if_else
+                  {||
+                     {== $accuracy_threshold 99.9} {== $accuracy_threshold 99.8}
+                     {== $accuracy_threshold 99.7} {== $accuracy_threshold 99.6}
+                     {== $accuracy_threshold 99.5} {== $accuracy_threshold 99.4}
+                     {== $accuracy_threshold 99.3} {== $accuracy_threshold 99.2}
+                     {== $accuracy_threshold 99.1}
+                  }
                   {sprintf {localize overlay_threshold_float} $accuracy_threshold}
                   {sprintf {localize overlay_threshold_int} $accuracy_threshold}
                }
@@ -837,7 +835,14 @@
             {if_else {== $accuracy_threshold_elem 0}
                {sprintf {localize overlay_num_lives_streak} $this_note_streak {- $num_of_lives 1}}
                {if_else $lowest_acc
-                  {if_else $float
+                  {if_else
+                     {||
+                        {== $accuracy_threshold 99.9} {== $accuracy_threshold 99.8}
+                        {== $accuracy_threshold 99.7} {== $accuracy_threshold 99.6}
+                        {== $accuracy_threshold 99.5} {== $accuracy_threshold 99.4}
+                        {== $accuracy_threshold 99.3} {== $accuracy_threshold 99.2}
+                        {== $accuracy_threshold 99.1}
+                     }
                      {sprintf {localize overlay_num_lives_acc_float} $lowest_acc {- $num_of_lives 1}}
                      {sprintf {localize overlay_num_lives_acc_int} $lowest_acc {- $num_of_lives 1}}
                   }
