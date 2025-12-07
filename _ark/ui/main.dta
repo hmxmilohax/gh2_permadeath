@@ -52,27 +52,55 @@
          {play_sfx cheat}
       }
    )
+   (skip_career_setup
+      {if {&& $permadeath $set_first_name_once}
+         {campaign set_profile_name $first_name 0}
+      }
+      {if $set_first_char_once
+         {game set_character $first_char TRUE}
+      }
+      {if $set_first_guitar_once
+         {game set_guitar
+            $first_guitar_body
+            $first_guitar_skin
+         }
+      }
+      {if $set_first_diff_once
+         {{game get_player_config 0} set_difficulty $first_diff}
+      }
+      {do
+         ($new_campaign {campaign new_campaign})
+         {campaign set_character_info}
+         {if_else $new_campaign
+            {ui goto_screen tour_start_screen}
+            {ui goto_screen career_screen}
+         }
+      }
+   )
    (SELECT_START_MSG
       {switch $component
          (main_career.btn
             {gamecfg set mode career}
-            {if_else {> {campaign num_profiles} 0}
-               {ui goto_screen chooseprof_screen}
-               {do
-                  {nameprof_screen set back_screen main_screen}
-                  {nameprof_screen set is_editing FALSE}
-                  {if_else $permadeath
-                     {nameprof_screen set profile_slot 0}
-                     {if_else $randomizer
-                        {nameprof_screen set profile_slot 1}
-                        {if_else $gym_unlock_all
-                           {nameprof_screen set profile_slot 3}
-                           {nameprof_screen set profile_slot 2}
+            {if_else {&& $permadeath $set_first_name_once $set_first_char_once $set_first_guitar_once $set_first_diff_once}
+               {$this skip_career_setup}
+               {if_else {> {campaign num_profiles} 0}
+                  {ui goto_screen chooseprof_screen}
+                  {do
+                     {nameprof_screen set back_screen main_screen}
+                     {nameprof_screen set is_editing FALSE}
+                     {if_else $permadeath
+                        {nameprof_screen set profile_slot 0}
+                        {if_else $randomizer
+                           {nameprof_screen set profile_slot 1}
+                           {if_else $gym_unlock_all
+                              {nameprof_screen set profile_slot 3}
+                              {nameprof_screen set profile_slot 2}
+                           }
                         }
                      }
+                     {nameprof_screen set next_screen sel_difficulty_screen}
+                     {ui goto_screen nameprof_screen}
                   }
-                  {nameprof_screen set next_screen sel_difficulty_screen}
-                  {ui goto_screen nameprof_screen}
                }
             }
          )

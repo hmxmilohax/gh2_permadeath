@@ -30,6 +30,17 @@
             (sd_diff4.btn kDifficultyExpert)
          }
       }
+      {if {! $set_first_diff_once}
+         {set $set_first_diff_once TRUE}
+         {set $first_diff
+            {switch $component
+               (sd_diff1.btn kDifficultyEasy)
+               (sd_diff2.btn kDifficultyMedium)
+               (sd_diff3.btn kDifficultyHard)
+               (sd_diff4.btn kDifficultyExpert)
+            }
+         }
+      }
       {$this update_difficulty}
    )
    (SELECT_START_MSG
@@ -445,6 +456,10 @@
             {sel_character_panel choose_skins}
             {do
                {game set_character {sel_character_panel get char_outfit} TRUE}
+               {if {! $set_first_char_once}
+                  {set $set_first_char_once TRUE}
+                  {set $first_char {sel_character_panel get char_outfit}}
+               }
                {ui goto_screen [done_screen]}
             }
          }
@@ -529,6 +544,11 @@
    )
    (exit {char_single set_paused FALSE})
    (goto_career
+      {if {! $set_first_guitar_once}
+         {set $set_first_guitar_once TRUE}
+         {set $first_guitar_body {sel_guitar_panel get_selected_guitar 0}}
+         {set $first_guitar_skin {sel_guitar_panel get_selected_skin 0}}
+      }
       {game set_guitar
          {sel_guitar_panel get_selected_guitar 0}
          {sel_guitar_panel get_selected_skin 0}
@@ -541,6 +561,18 @@
             {ui goto_screen career_screen}
          }
       }
+      #ifdef HX_XBOX
+      {if {&& $permadeath $set_first_guitar_once $set_first_name_once $set_first_diff_once $set_first_char_once}
+         {new ObjectDir permadeath_settings}
+         {permadeath_settings set career_name $first_name}
+         {permadeath_settings set guitar_body $first_guitar_body}
+         {permadeath_settings set guitar_skin $first_guitar_skin}
+         {permadeath_settings set career_char $first_char}
+         {permadeath_settings set career_diff $first_diff}
+         {permadeath_settings save_objects "GAME:/permadeath_settings.milo"}
+         {delete permadeath_settings}
+      }
+      #endif
    )
    (BUTTON_DOWN_MSG
       {switch $button
@@ -587,6 +619,8 @@
    (go_back
       {$this backwards_anim}
       {synth play_sequence button_back.cue}
+      {set $set_first_guitar_once FALSE}
+      {set $set_first_char_once FALSE}
       {ui goto_screen sel_character_new_screen}
    )
 }

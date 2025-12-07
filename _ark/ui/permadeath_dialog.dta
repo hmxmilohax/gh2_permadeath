@@ -569,6 +569,33 @@
             {randomize_career}
             {set $autosave TRUE}
             {set $disable_save FALSE}
+            #ifdef HX_XBOX
+            {set $load {load_objects "GAME:/permadeath_settings.milo"}}
+            {if $load
+               {if {$load get career_name}
+                  {set $first_name {$load get career_name}}
+                  {set $set_first_name_once TRUE}
+                  ;all of are other checks are also all or nothing
+                  {set $first_guitar_body {$load get guitar_body}}
+                  {set $first_guitar_skin {$load get guitar_skin}}
+                  {set $set_first_guitar_once TRUE}
+               }
+               {if {$load get career_char}
+                  {set $first_char {$load get career_char}}
+                  {set $set_first_char_once TRUE}
+               }
+               {if {$load get career_diff}
+                  {switch {$load get career_diff}
+                     (0 {set $first_diff kDifficultyEasy})
+                     (1 {set $first_diff kDifficultyMedium})
+                     (2 {set $first_diff kDifficultyHard})
+                     (3 {set $first_diff kDifficultyExpert})
+                  }
+                  {set $set_first_diff_once TRUE}
+               }
+            }
+            {delete $load}
+            #endif
             {ui goto_screen permadeath_save_screen}
          )
          (dl_button2.btn
@@ -694,12 +721,12 @@
 {new UIPanel
    manage_band_mid_panel
    (file manage_band.milo)
-   (focus {if_else {|| $gym_unlock_all $disable_save} delete_band.btn rename_band.btn})
+   (focus {if_else {|| $gym_unlock_all {&& {! $permadeath} $disable_save}} delete_band.btn rename_band.btn})
    (enter
       {manage_band.lbl set_localized_text {localize perma_welcome}}
       {rename_band.btn set text_token manage_band}
       {delete_band.btn set text_token gym_options}
-      {if_else {|| $gym_unlock_all $disable_save}
+      {if_else {|| $gym_unlock_all {&& {! $permadeath} $disable_save}}
          {do
             {$this set_focus delete_band.btn}
             {$this disable rename_band.btn}
@@ -727,7 +754,26 @@
    (SELECT_START_MSG
       {switch $component
          (rename_band.btn
-            {ui goto_screen options_chooseprof_screen}
+            {if_else $permadeath
+               {do
+                  {set $set_first_name_once FALSE}
+                  {set $set_first_char_once FALSE}
+                  {set $set_first_guitar_once FALSE}
+                  {set $set_first_diff_once FALSE}
+                  #ifdef HX_XBOX
+                  {new ObjectDir permadeath_settings}
+                  {permadeath_settings set career_name 0}
+                  {permadeath_settings set guitar_body 0}
+                  {permadeath_settings set guitar_skin 0}
+                  {permadeath_settings set career_char 0}
+                  {permadeath_settings set career_diff 0}
+                  {permadeath_settings save_objects "GAME:/permadeath_settings.milo"}
+                  {delete permadeath_settings}
+                  #endif
+                  {ui goto_screen permadeath_go_to_options_screen}
+               }
+               {ui goto_screen options_chooseprof_screen}
+            }
          )
          (delete_band.btn
             {ui goto_screen permadeath_go_to_options_screen}

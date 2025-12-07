@@ -235,6 +235,10 @@
                   }
                }
                {synth play_sequence button_select}
+               {if {! $set_first_name_once}
+                  {set $set_first_name_once TRUE}
+                  {set $first_name $profile}
+               }
                {autosave_goto {$this get next_screen}}
             )
          }
