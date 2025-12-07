@@ -1158,15 +1158,15 @@
                {game set_venue big}
             )
             (sv_theatre.btn
-               {$this set_venue_map_frame #ifdef HX_XBOX 5 #else #ifdef GAME_GH2 5 #else 4 #endif #endif}
+               {$this set_venue_map_frame #ifdef GAME_GH2 5 #else 4 #endif}
                {game set_venue theatre}
             )
             (sv_fest.btn
-               {$this set_venue_map_frame #ifdef HX_XBOX 6 #else #ifdef GAME_GH2 6 #else 5 #endif #endif}
+               {$this set_venue_map_frame #ifdef GAME_GH2 6 #else 5 #endif}
                {game set_venue fest}
             )
             (sv_arena.btn
-               {$this set_venue_map_frame #ifdef HX_XBOX 7 #else #ifdef GAME_GH2 7 #else 6 #endif #endif}
+               {$this set_venue_map_frame #ifdef GAME_GH2 7 #else 6 #endif}
                {game set_venue arena}
             )
             (sv_stone.btn
