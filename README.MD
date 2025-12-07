@@ -17,6 +17,7 @@ Accessibility and ways to keep it fresher, without obscuring the vision of the o
 * Built off GH80s on ps2, meaning hopo fix already included
 * Toggleable Permadeath mode (See [#permadeath_information](#permadeath_information))
 * Permadeath stats overlay in song select and endgame
+* Skip Career setup flow in permadeath
 * Custom accuracy (80%-99.9%) thresholds for permadeath wins
 * Selectable Lives amounts for permadeath
 * Toggleable Randomizer mode (See [#randomizer_information](#randomizer_information))
@@ -31,6 +32,8 @@ Accessibility and ways to keep it fresher, without obscuring the vision of the o
 * PS2 campaign order for GH2 Xbox 360
 * Xbox 360 exclusives in the shop (not present on ps2 at all)
 * Auto unlock all multiplayer basses
+* Grim Ripper may use any guitar
+* All characters may use the Scythe guitar, after purchasing from the shop
 * All region and platform specific cheat codes available
 * Auto enable Hyperspeed on main menu entry
 * Default to Expert in select difficulty screens
@@ -48,7 +51,7 @@ Accessibility and ways to keep it fresher, without obscuring the vision of the o
 * Purchaseable Scythe guitar, usable for all characters
 * Purchaseable Red-Octane SG leftover in the vanilla files
 * Revised store prices to account for changes
-* Fast start (Xbox 360)
+* Fast start (skip startup publisher screens)
 * Fix "X" in streak meter on PS2 Emulator
 * Does not post to Xbox 360 Live leaderboards
 
