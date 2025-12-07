@@ -96,7 +96,6 @@
 )
 (op_bonus_material "Vídeos de bonificación")
 (op_credits "Créditos")
-(op_data_settings "Gestionar grupo")
 (op_game_settings "Config. sonido")
 (op_video_settings "Config. vídeo")
 (op_memcard "Config. datos")
