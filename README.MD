@@ -32,8 +32,6 @@ Accessibility and ways to keep it fresher, without obscuring the vision of the o
 * PS2 campaign order for GH2 Xbox 360
 * Xbox 360 exclusives in the shop (not present on ps2 at all)
 * Auto unlock all multiplayer basses
-* Grim Ripper may use any guitar
-* All characters may use the Scythe guitar, after purchasing from the shop
 * All region and platform specific cheat codes available
 * Auto enable Hyperspeed on main menu entry
 * Default to Expert in select difficulty screens
@@ -48,11 +46,13 @@ Accessibility and ways to keep it fresher, without obscuring the vision of the o
 * Custom save name to not conflict with vanilla games for both 360 and ps2
 * Remember song list position between quickplay and practice
 * Full Spanish localization support (¡Sí, hablo español!)
+* Grim Ripper may use any guitar
 * Purchaseable Scythe guitar, usable for all characters
 * Purchaseable Red-Octane SG leftover in the vanilla files
 * Revised store prices to account for changes
 * Fast start (skip startup publisher screens)
 * Fix "X" in streak meter on PS2 Emulator
+* Includes official fixed Wrathchild chart originally only included in the GH80s PAL release
 * Does not post to Xbox 360 Live leaderboards
 
 # Playing in Xenia
